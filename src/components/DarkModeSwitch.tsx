@@ -2,26 +2,22 @@
 
 import React from 'react'
 import { useTheme } from "./ThemeContext";
-import { Select, SelectContent, SelectItem, SelectTrigger } from "./ui/select";
-import { Button } from './ui/button';
-import { Sun } from 'lucide-react';
+import { Moon, Sun } from 'lucide-react';
 
 const DarkModeSwitch = () => {
     const {isDark, toggleTheme} =useTheme();
 
-    const theme= isDark?'dark':'light'
-  return (
-    <Select value={theme} onValueChange={toggleTheme}>
-        <SelectTrigger className=''>
-            <Sun className="h-4 w-4" />
-        </SelectTrigger>
+    const toggleColor= isDark?'white':'black'
 
-        <SelectContent>
-        <SelectItem value={'dark'}>Dark</SelectItem>
-        <SelectItem value={'light'}>Light</SelectItem>
-        </SelectContent>
-  </Select>
-  )
+    return (
+      <div onClick={()=>toggleTheme(!isDark)} className='p-4 cursor-pointer'>
+        {isDark ?
+        <Sun className="h-4 w-4"  color={toggleColor}/>
+        :
+          <Moon className='h-4 w-4' color={toggleColor}/>
+        }
+      </div>
+    )
 }
 
 export default DarkModeSwitch
