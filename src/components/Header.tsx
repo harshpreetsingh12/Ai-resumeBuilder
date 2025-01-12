@@ -2,7 +2,6 @@ import { SignedIn, SignedOut, SignInButton, UserButton } from "@clerk/nextjs";
 import Image from "next/image";
 import Link from "next/link";
 import { Button } from "./ui/button";
-import { LayoutDashboard, Sun } from "lucide-react";
 import DarkModeSwitch from "./DarkModeSwitch";
 
 // import { checkUser } from "@/lib/checkUser";
@@ -24,24 +23,15 @@ const Header = async () => {
         </Link>
         <div className="flex items-center space-x-4">
           <SignedIn>
-            <Link
-              href={"/dashboard"}
-              className="text-gray-600 hover:text-blue-600 flex items-center gap-2"
-            >
-              <Button variant="outline">
-                <LayoutDashboard size={18} />
-                <span className="hidden md:inline">Dashboard</span>
-              </Button>
-            </Link>
-
            <DarkModeSwitch/>
-         
           </SignedIn>
+
           <SignedOut>
             <SignInButton forceRedirectUrl="/dashboard">
               <Button variant="outline">Login</Button>
             </SignInButton>
           </SignedOut>
+          
           <SignedIn>
             <UserButton
               appearance={{

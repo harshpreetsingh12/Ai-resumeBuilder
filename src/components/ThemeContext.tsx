@@ -8,7 +8,7 @@ interface ThemeContextType {
 }
 
 const defaultValue: ThemeContextType = {
-  isDark: true,
+  isDark: false,
   toggleTheme: () => {
     console.warn('toggleTheme called outside of ThemeProvider');
   },
@@ -17,7 +17,7 @@ const defaultValue: ThemeContextType = {
 const ThemeContext = createContext<ThemeContextType>(defaultValue);
 
 export const ThemeProvider = ({ children }: { children: ReactNode }) => {
-  const [isDark, setIsDark] = useState(true);
+  const [isDark, setIsDark] = useState(defaultValue.isDark);
 
   const toggleTheme = () => setIsDark(!isDark);
 
