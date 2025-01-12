@@ -2,8 +2,6 @@
 
 import React from 'react'
 import { useTheme } from "./ThemeContext";
-import { Select, SelectContent, SelectItem, SelectTrigger } from "./ui/select";
-import { Button } from './ui/button';
 import { Moon, Sun } from 'lucide-react';
 
 const DarkModeSwitch = () => {
