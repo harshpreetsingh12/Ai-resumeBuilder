@@ -4,10 +4,17 @@ import { createContext, useState, useContext, ReactNode } from 'react';
 
 interface ThemeContextType {
   isDark: boolean;
-  toggleTheme: () => void;
+  toggleTheme: (isDark: boolean) => void;
 }
 
-const ThemeContext = createContext<ThemeContextType | null>(null);
+const defaultValue: ThemeContextType = {
+  isDark: true,
+  toggleTheme: () => {
+    console.warn('toggleTheme called outside of ThemeProvider');
+  },
+};
+
+const ThemeContext = createContext<ThemeContextType>(defaultValue);
 
 export const ThemeProvider = ({ children }: { children: ReactNode }) => {
   const [isDark, setIsDark] = useState(true);
