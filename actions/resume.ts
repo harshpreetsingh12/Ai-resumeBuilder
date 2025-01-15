@@ -9,6 +9,8 @@ export async function createResume(){
 
         if(!user) console.log("User not found");
 
+        console.log(user)
+        return 
         const document= await db.resume.create({
             data: {
                 userId:user.id,
@@ -38,6 +40,27 @@ export async function getUserResumes() {
         })
 
         return documents
+    }
+    catch(error){
+        if (error instanceof Error) {
+            throw new Error(error.message);
+        } else {
+            throw new Error("An unknown error occurred");
+        }
+    }
+}
+
+export async function getUserResume(Id:string) {
+    try{
+        const user = await isUserExist();
+        if(!user) console.log("user not found");
+
+        const resume = await db.resume.find({
+            where:{ userId: user.id, _id:Id },
+            orderBy: { createdAt: "desc" },
+        })
+
+        return resume
     }
     catch(error){
         if (error instanceof Error) {
