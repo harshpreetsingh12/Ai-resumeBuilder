@@ -14,39 +14,53 @@ datasource db {
   url  	    = env("DATABASE_URL")
 }
 
-model Resume{
- id    String @id @default(cuid())
- userId   String @unique
 
- title    String?
- description  String?
+model User {
+  id            String    @id @default(uuid())
+  clerkUserId   String    @unique // clerk user id
+  email         String    @unique
+  name          String?
+  imageUrl      String?
+  resumes       Resume[]
+  createdAt     DateTime      @default(now())
+  updatedAt     DateTime      @updatedAt
 
- photoUrl   String?
- colorHex   String @default("#000000")
- boarderStyle  String @default("squircle")
- summary    String?  
- firstName  String?
- lastName   String? 
- jobTitle   String? 
- city       String?
- country    String?
- phone      String?
- email      String?
-
- createdAt DateTime @default(now())
- updatedAt DateTime @updatedAt
-
- ResumeContent ResumeContent[]
-
- @@map("resume")
+  @@map("users") //database name for the table
 }
 
-model ResumeContent{
-   id  String @id @default(cuid())
-   skills  String[]
-   resumeId  String
-   resume  Resume  @relation(fields: [resumeId], references: [id], onDelete: Cascade)
+model Resume {
+  id    String @id @default(cuid())
+  userId   String 
+
+  title    String?  @default("Untitled")
+  description  String?
+
+  photoUrl   String?
+  colorHex   String @default("#000000")
+  boarderStyle  String @default("squircle")
+  summary    String?  
+  firstName  String?
+  lastName   String? 
+  jobTitle   String? 
+  city       String?
+  country    String?
+  phone      String?
+  email      String?
+
+    user             User              @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("resumes")
+}
+
+// model ResumeContent{
+//    id  String @id @default(cuid())
+//    skills  String[]
+//    resumeId  String
+//    resume  Resume  @relation(fields: [resumeId], references: [id], onDelete: Cascade)
    
 
-  @@map("resume_content")
-}
+//   @@map("resume_content")
+// }

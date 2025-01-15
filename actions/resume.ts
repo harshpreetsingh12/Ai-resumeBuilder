@@ -2,6 +2,7 @@
 
 import db  from "@/lib/prisma";
 import { isUserExist } from "./helpers";
+import { revalidatePath } from "next/cache";
 
 export async function createResume(){
     try{
@@ -14,7 +15,7 @@ export async function createResume(){
                 userId:user.id,
             }
         });
-        
+        revalidatePath("/dashboard");
         return {success:true, data:document}
     }
     catch(error){
@@ -27,7 +28,7 @@ export async function createResume(){
 }
 
 
-export async function getUserResumes() {
+export async function getAllUserResumes() {
     try{
         const user = await isUserExist();
         if(!user) console.log("user not found");
@@ -38,6 +39,29 @@ export async function getUserResumes() {
         })
 
         return documents
+    }
+    catch(error){
+        if (error instanceof Error) {
+            throw new Error(error.message);
+        } else {
+            throw new Error("An unknown error occurred");
+        }
+    }
+}
+
+export async function getUserResume(resumeId:string) {
+    try{
+        const user = await isUserExist();
+        if(!user) console.log("user not found");
+
+        const resume = await db.resume.findUnique({
+            where:{ 
+                userId: user.id,
+                id:resumeId 
+            },
+        })
+
+        return resume
     }
     catch(error){
         if (error instanceof Error) {
