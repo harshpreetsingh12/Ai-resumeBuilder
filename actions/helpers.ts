@@ -6,6 +6,7 @@ export const isUserExist = async () => {
     const { userId } = await auth();
     if (!userId) throw new Error("Unauthorized");
 
+    // check existing user
     const user = await db.user.findUnique({
       where: {
         clerkUserId: userId,

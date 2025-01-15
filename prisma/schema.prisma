@@ -36,5 +36,17 @@ model Resume{
  createdAt DateTime @default(now())
  updatedAt DateTime @updatedAt
 
+ ResumeContent ResumeContent[]
+
  @@map("resume")
+}
+
+model ResumeContent{
+   id  String @id @default(cuid())
+   skills  String[]
+   resumeId  String
+   resume  Resume  @relation(fields: [resumeId], references: [id], onDelete: Cascade)
+   
+
+  @@map("resume_content")
 }
