@@ -1,6 +1,19 @@
 import React from 'react'
+import { getUserResume } from '../../../../../actions/resume';
 
-const ResumePage = () => {
+type ResumePageParamType = {
+  id: string;
+};
+
+type ResumePageProps = {
+  params: Promise<ResumePageParamType>;
+};
+
+const ResumePage= async ({ params }:ResumePageProps) => {
+  const resolved= await params
+  const accountData = await getUserResume(resolved.id);
+
+  console.log(accountData)
   return (
     <div>
       

@@ -2,11 +2,12 @@
 
 import { Button } from '@/components/ui/button';
 import useFetch from '@/hooks/useFetch';
-import { Plus } from 'lucide-react';
+import { Dock, Plus } from 'lucide-react';
 import React, { useEffect } from 'react'
 import { createResume } from '../../../../actions/resume';
 import { toast } from 'sonner';
 import { useRouter } from 'next/navigation';
+import Resume_card from './resume_card';
 
 interface ResumeData {
   name: string;
@@ -14,7 +15,18 @@ interface ResumeData {
   skills: string[];
 }
 
-const DashboardPage = () => {
+
+type Resume = {
+  id: string;
+  title: string; 
+};
+
+type DashBoardPageProps = {
+  resumes: Resume[];
+};
+
+const DashboardPage = ({resumes}:DashBoardPageProps) => {
+ 
   const { 
       data: resumeData,
       error,
@@ -26,9 +38,9 @@ const DashboardPage = () => {
 
   useEffect(()=>{
     if(resumeData && !updateDefaultLoading ){
-        if(resumeData.data?._id){
+        if(resumeData.data?.id){
           router.push(
-            `/resume/${resumeData.data?._id}`
+            `/resume/${resumeData.data?.id}`
           )
         }
         toast.success('Resume Setup successful')
@@ -48,6 +60,14 @@ const DashboardPage = () => {
           New Resume
         <Plus  className="h-4 w-4" />
       </Button>
+      <div className='my-12 mx-2'>
+
+        {resumes.map(resume=>{
+          return (
+            <Resume_card key={resume.id} resume={resume}/>
+          )
+        })}
+      </div>
     </div>
   )
 }
