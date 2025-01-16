@@ -56,7 +56,7 @@ const DashboardPage = ({resumes}:DashBoardPageProps) => {
 
   return (
     <div>
-       <Button variant="outline" onClick={()=>createFuncFunction()}>
+       <Button disabled={updateDefaultLoading} variant="outline" onClick={()=>createFuncFunction()}>
           New Resume
         <Plus  className="h-4 w-4" />
       </Button>

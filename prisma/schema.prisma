@@ -46,8 +46,9 @@ model Resume {
   country    String?
   phone      String?
   email      String?
+  ResumeContent       ResumeContent[]
 
-    user             User              @relation(fields: [userId], references: [id], onDelete: Cascade)
+  user             User              @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -55,12 +56,53 @@ model Resume {
   @@map("resumes")
 }
 
-// model ResumeContent{
-//    id  String @id @default(cuid())
-//    skills  String[]
-//    resumeId  String
-//    resume  Resume  @relation(fields: [resumeId], references: [id], onDelete: Cascade)
+model ResumeContent{
+   id  String @id @default(cuid())
+   resumeId  String
+   resume  Resume  @relation(fields: [resumeId], references: [id], onDelete: Cascade)
    
+   // resume data
+   skills  String[]
+   socialData  Json
+   projectDetails Json
+   certifications Json
+   education Json
 
-//   @@map("resume_content")
-// }
+  @@map("resume_content")
+}
+
+// resumecontent --->[
+//         {
+//           platform: "LinkedIn",
+//           url: "https://linkedin.com/in/username",
+//           username: "username",
+//         },
+//        ....
+//       ],
+// projectDetails ---> [
+//         {
+//           title: "sometjhign",
+//           url: "https://linkedin.com/in/username",
+//           start date: "234324",
+//           end date: "23423",
+//          "summary"
+//         },
+//        ....
+//       ],
+// certifications ---> [
+//         {
+//           title: "sometjhign",
+//           link:'asdasd'
+//           start date: "234324",
+//           end date: "23423",
+//         },
+//        ....
+//       ],
+// education ---> [
+//         {
+//           school_name: "sometjhign",
+//           start_date: "234324",
+//           end_date: "23423",
+//         },
+//        ....
+//       ],
