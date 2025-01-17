@@ -1,15 +1,40 @@
 'use client'; 
-import React from 'react'
+import { useAppStore } from '@/zustand';
+import React, { useEffect } from 'react'
 
-type ResumePageParamType = {
-    id: string;
-  };
+type ResumeType = {
+  id: string;
+  userId: string;
+  title: string;
+  description: string;
+  photoUrl: string;
+  colorHex: string;
+  boarderStyle: string;
+  summary: string;
+  firstName: string;
+  lastName: string;
+  jobTitle: string;
+  city: string;
+  country: string;
+  phone: string;
+  email: string;
+};
+ 
+type ResumePageProps = {
+  resumeData:ResumeType;
+};
   
-  type ResumePageProps = {
-    params: Promise<ResumePageParamType>;
-  };
+const Resume_template = ({resumeData}:ResumePageProps) => {
+
+  const updateResumeData = useAppStore((state) => state.updateResumeData);
+  const resumeState = useAppStore((state) => state.resumeState);
+
+  useEffect(() => {
+    if (resumeData) {
+      updateResumeData(resumeData);
+    }
+  }, [resumeData]);
   
-const Resume_template = ({resumeData}) => {
   return (
     <div>
       right 
