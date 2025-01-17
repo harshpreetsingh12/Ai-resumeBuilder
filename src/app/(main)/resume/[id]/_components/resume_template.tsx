@@ -35,7 +35,7 @@ const Resume_template = ({resumeData}:ResumePageProps) => {
   }, [resumeData]);
   
   return (
-    <div>
+    <div className='p-6 h-full border-red-600 flex justify-center'>
       <ResumeHead/> 
     </div>
   )

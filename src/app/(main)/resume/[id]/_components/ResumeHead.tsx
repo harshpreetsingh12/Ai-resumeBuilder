@@ -4,11 +4,11 @@ import React from 'react'
 const ResumeHead = () => {
     const resumeState = useAppStore((state) => state.resumeState);
 
-  return (
-    <div>
-      
-    </div>
-  )
+    return (
+        <div>
+             head
+        </div>
+    )
 }
 
 export default ResumeHead

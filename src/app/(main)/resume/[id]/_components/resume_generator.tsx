@@ -25,17 +25,12 @@ type ResumePageProps = {
   resumeData: ResumeType;
 };
 
-const Resume_template = ({ resumeData }: ResumePageProps) => {
+const Resume_Generator = ({ resumeData }: ResumePageProps) => {
   const updateResumeData = useAppStore((state) => state.updateResumeData);
   const resumeState = useAppStore((state) => state.resumeState);
 
-  useEffect(() => {
-    if (resumeData) {
-      updateResumeData(resumeData);
-    }
-  }, [resumeData]);
 
-  return <div className="">right</div>;
+  return <div className="">Left</div>;
 };
 
-export default Resume_template;
+export default Resume_Generator;
