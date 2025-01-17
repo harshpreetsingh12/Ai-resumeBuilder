@@ -1,7 +1,7 @@
 import { create } from "zustand";
-import { createResumeSlice, resumeState } from "./slices/titleSlice";
+import { createResumeSlice, ResumeState } from "./slices/resumeSlice";
 
-type AppState = resumeState;
+type AppState = ResumeState;
 
 export const useAppStore = create<AppState>()((...a) => ({
   ...createResumeSlice(...a),
