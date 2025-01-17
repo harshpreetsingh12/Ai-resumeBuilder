@@ -13,8 +13,6 @@ type ResumePageProps = {
 const ResumePage= async ({ params }:ResumePageProps) => {
   const resolved= await params
   const resumeData = await getUserResume(resolved.id);
-
-  console.log(resumeData)
   return (
     <div>
       <Resume_template

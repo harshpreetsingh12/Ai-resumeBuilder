@@ -19,13 +19,17 @@ type ResumeType = {
 };
 
 export interface ResumeState {
-  state: ResumeType;
+  resumeState: ResumeType;
   updateResumeData: (data: object) => void;
 }
 
 export const createResumeSlice: StateCreator<ResumeState> = (set) => ({
-  state: DefaultState,
-  updateResumeData: (data) => set((state) => ({ ...state, ...data })),
+  resumeState: DefaultState,
+  updateResumeData: (data) =>
+    set((state) => ({
+      ...state,
+      resumeState: { ...state.resumeState, ...data }, 
+    })),
 });
 
 const DefaultState={
