@@ -1,7 +1,7 @@
-"use client";
-
-import { useAppStore } from "@/zustand";
-import React, { useEffect } from "react";
+'use client'; 
+import { useAppStore } from '@/zustand';
+import React, { useEffect } from 'react'
+import ResumeHead from './ResumeHead';
 
 type ResumeType = {
   id: string;
@@ -20,22 +20,25 @@ type ResumeType = {
   phone: string;
   email: string;
 };
-
+ 
 type ResumePageProps = {
-  resumeData: ResumeType;
+  resumeData:ResumeType;
 };
-
-const Resume_template = ({ resumeData }: ResumePageProps) => {
+  
+const Resume_template = ({resumeData}:ResumePageProps) => {
   const updateResumeData = useAppStore((state) => state.updateResumeData);
-  const resumeState = useAppStore((state) => state.resumeState);
 
   useEffect(() => {
     if (resumeData) {
       updateResumeData(resumeData);
     }
   }, [resumeData]);
-
-  return <div className="">right</div>;
-};
+  
+  return (
+    <div>
+      <ResumeHead/> 
+    </div>
+  )
+}
 
 export default Resume_template;
