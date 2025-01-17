@@ -18,28 +18,30 @@ type ResumeType = {
   email: string;
 };
 
-export interface resumeState {
+export interface ResumeState {
   state: ResumeType;
   updateResumeData: (data: object) => void;
 }
 
-export const createResumeSlice: StateCreator<resumeState> = (set) => ({
-  state: {
-    id: "",
-    userId: "",
-    title: "",
-    description: "",
-    photoUrl: "",
-    colorHex: "",
-    boarderStyle: "",
-    summary: "",
-    firstName: "",
-    lastName: "",
-    jobTitle: "",
-    city: "",
-    country: "",
-    phone: "",
-    email: "",
-  },
+export const createResumeSlice: StateCreator<ResumeState> = (set) => ({
+  state: DefaultState,
   updateResumeData: (data) => set((state) => ({ ...state, ...data })),
 });
+
+const DefaultState={
+  id: "",
+  userId: "",
+  title: "",
+  description: "",
+  photoUrl: "",
+  colorHex: "",
+  boarderStyle: "",
+  summary: "",
+  firstName: "",
+  lastName: "",
+  jobTitle: "",
+  city: "",
+  country: "",
+  phone: "",
+  email: "",
+}

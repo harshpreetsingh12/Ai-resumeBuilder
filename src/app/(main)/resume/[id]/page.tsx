@@ -1,5 +1,6 @@
 import React from 'react'
 import { getUserResume } from '../../../../../actions/resume';
+import Resume_template from './_components/resume_template';
 
 type ResumePageParamType = {
   id: string;
@@ -11,12 +12,14 @@ type ResumePageProps = {
 
 const ResumePage= async ({ params }:ResumePageProps) => {
   const resolved= await params
-  const accountData = await getUserResume(resolved.id);
+  const resumeData = await getUserResume(resolved.id);
 
-  console.log(accountData)
+  console.log(resumeData)
   return (
     <div>
-      
+      <Resume_template
+          resumeData={resumeData}
+      />
     </div>
   )
 }
