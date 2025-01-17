@@ -24,6 +24,9 @@ const Header = async () => {
           </span>
         </Link>
         <div className="flex items-center space-x-4">
+          <Button className="">
+            <Link href="/dashboard">dashboard</Link>
+          </Button>
           <SignedIn>
             <DarkModeSwitch />
           </SignedIn>
