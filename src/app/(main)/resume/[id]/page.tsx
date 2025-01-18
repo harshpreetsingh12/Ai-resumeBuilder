@@ -1,8 +1,7 @@
 import React from "react";
 import { getUserResume } from "../../../../../actions/resume";
-import Resume_Generator from "./_components/resume_generator";
-import ResumeTitle from "./_components/ResumeTitle";
-import Resume_template from "./_components/Resume_tem[;ate/resume_template";
+import Resume_Generator from "./_components/ResumeGenerator/resume_generator";
+import Resume_template from "./_components/Resume_template/resume_template";
 
 type ResumePageParamType = {
   id: string;
