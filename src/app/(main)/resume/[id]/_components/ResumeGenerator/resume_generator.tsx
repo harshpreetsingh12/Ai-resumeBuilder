@@ -5,6 +5,7 @@ import React, { useMemo, useState } from "react";
 import { ChevronRight } from "lucide-react";
 import ResumeInfoForm from "./ResumeInfoForm";
 import ExperienceForm from "./ExperienceForm";
+import { Button } from "@/components/ui/button";
 
 type ResumeType = {
   id: string;
@@ -45,9 +46,20 @@ const Resume_Generator = ({ resumeData }: ResumePageProps) => {
     }
   }
 
+  const CurrentTabIndex=useMemo(()=>{
+    return GENERATOR_STEPS.findIndex((el)=>el.key===currentTab.key)
+  },[currentTab])
+
+  const handlePrevTab=()=>{
+    setCurrentTab(GENERATOR_STEPS[CurrentTabIndex-1])
+  }
+  const handleNextTab=()=>{
+    setCurrentTab(GENERATOR_STEPS[CurrentTabIndex+1])
+  }
+
   const FormUi= useMemo(()=>FormGenerator(), [currentTab])
   return (
-    <div className="px-3 xl:px-10 w-full flex flex-col">
+    <div className="px-3 xl:px-10 w-full flex flex-col h-[86vh]">
       <div className="flex justify-center">
         {GENERATOR_STEPS.map((gen,index)=>{
           return (
@@ -73,6 +85,11 @@ const Resume_Generator = ({ resumeData }: ResumePageProps) => {
       </div>
 
       {FormUi}
+
+      <div className="flex justify-center gap-4 mt-auto w-full">
+        <Button variant="ghost" className="text-xs px-4 py-2" onClick={handlePrevTab} disabled={CurrentTabIndex===0}>Previous</Button>
+        <Button className="text-xs px-4 py-2" onClick={handleNextTab} disabled={CurrentTabIndex===GENERATOR_STEPS.length-1}>Next</Button>
+      </div>
     </div>
   )
 };
