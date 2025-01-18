@@ -48,8 +48,8 @@ const Resume_Generator = ({ resumeData }: ResumePageProps) => {
   const FormUi= useMemo(()=>FormGenerator(), [currentTab])
   return (
     <div className="px-3 xl:px-10 w-full flex flex-col">
-      <div className="flex">
-        {GENERATOR_STEPS.map((gen)=>{
+      <div className="flex justify-center">
+        {GENERATOR_STEPS.map((gen,index)=>{
           return (
             <div 
               key={gen.key} 
@@ -57,7 +57,9 @@ const Resume_Generator = ({ resumeData }: ResumePageProps) => {
               className={`items-center flex ${currentTab.key!=gen.key ? "text-gray-500":"text-black"} text-xs mx-2 gap-2 cursor-pointer hover:text-black`}
             >
               <span>{gen.title}</span>
+              {index!==GENERATOR_STEPS.length -1 && 
               <ChevronRight  size={12}/>
+              }
             </div>
           )
         })}
