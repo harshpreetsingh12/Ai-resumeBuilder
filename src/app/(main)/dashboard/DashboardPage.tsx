@@ -8,6 +8,7 @@ import { createResume } from '../../../../actions/resume';
 import { toast } from 'sonner';
 import { useRouter } from 'next/navigation';
 import Resume_card from './resume_card';
+import { generateExperience, generateProjects } from '../../../../actions/generators';
 
 interface ResumeData {
   name: string;
@@ -35,6 +36,9 @@ const DashboardPage = ({resumes}:DashBoardPageProps) => {
   } =useFetch(createResume);
   const router = useRouter()
 
+  function tempAi() {
+    generateProjects("todo list with crud operation in javascript.")
+  }
 
   useEffect(()=>{
     if(resumeData && !updateDefaultLoading ){
@@ -56,8 +60,9 @@ const DashboardPage = ({resumes}:DashBoardPageProps) => {
 
   return (
     <div>
-       <Button disabled={updateDefaultLoading} variant="outline" onClick={()=>createFuncFunction()}>
-          New Resume
+       <Button disabled={updateDefaultLoading} variant="outline" onClick={()=>tempAi()}>
+        New Resume
+
         <Plus  className="h-4 w-4" />
       </Button>
       <div className='my-12 mx-2'>
