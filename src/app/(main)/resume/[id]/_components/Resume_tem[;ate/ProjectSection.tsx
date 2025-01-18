@@ -1,6 +1,8 @@
 import { Link2 } from 'lucide-react'
 import Link from 'next/link'
 import React from 'react'
+import HexContainer from './HexContainer'
+import Headlines from './Headlines'
 
 type ProjectType={
   projectName: string,
@@ -32,14 +34,16 @@ const TestingData=[
 
 const ProjectSection = () => {
   return (
-    <div className='flex w-full flex-col relative justify-between border-b-2 border-b-gray-400 py-3'>
-      <h1 className='text-black text-sm font-bold'>Projects</h1>
-      <div className='flex flex-col gap-1'>
-        {TestingData.map((project,index)=>{
-          return <ProjectCard key={index} project={project}/>
-        })}
+    <HexContainer>
+      <div className='flex w-full flex-col relative justify-between py-3'>
+        <Headlines title="Projects"/>
+        <div className='flex flex-col gap-1'>
+          {TestingData.map((project,index)=>{
+            return <ProjectCard key={index} project={project}/>
+          })}
+        </div>
       </div>
-    </div>
+    </HexContainer>
   )
 }
 

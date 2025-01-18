@@ -1,5 +1,6 @@
 import { format } from 'date-fns'
 import React from 'react'
+import Headlines from './Headlines'
 
 type EducationType={
   courseName: string,
@@ -32,7 +33,7 @@ const TestingData=[
 const EducationSection = () => {
   return (
     <div className='flex w-full flex-col relative justify-between py-3'>
-      <h1 className='text-black text-sm font-bold'>Education</h1>
+      <Headlines title="Education"/>
       <div className='flex flex-col gap-1'>
         {TestingData.map((education,index)=>{
           return <ExperienceCard key={index} education={education}/>

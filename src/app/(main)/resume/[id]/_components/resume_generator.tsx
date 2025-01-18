@@ -29,6 +29,7 @@ type ResumePageProps = {
 const Resume_Generator = ({ resumeData }: ResumePageProps) => {
   const updateResumeData = useAppStore((state) => state.updateResumeData);
   const resumeState = useAppStore((state) => state.resumeState);
+  
   return <div className="">
      <ResumeTitle/>
   </div>;
