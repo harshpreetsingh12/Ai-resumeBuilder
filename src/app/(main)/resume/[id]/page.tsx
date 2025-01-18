@@ -19,7 +19,7 @@ const TempresumeData= {
   description: 'Implemented a flexible voucher-based subscription model within the existing payment integration, and contributed to the design and troubleshooting of comprehensive system architectures, including database structures.',
   photoUrl: "https://harshpreetsingh-portfolio.netlify.app/assets/imgv/me2.webp",
   colorHex: 'red',
-  summary: "Developed workflow management features allowing teams to collaborate on tasks within a shared document environment. Enabled admins to assign and track tasks, leveraging React.js for dynamic UI updates and Redux for state management.Applied learning and reward system where users received weekly tasks and earned points based on AI algorithms. Designed the feature to boost user engagement",
+  summary: "I am a Frontend Engineer with nearly 2 years of experience working closely with a wide range of tech stacks. I believe I would be a great fit for this role because I have been deeply involved in various phases of the development lifecycle. I am capable of both leading a team and continuously improving my own skills.",
   firstName: "Harshpreet",
   lastName: "Singh",
   jobTitle: "Software Engineer",
