@@ -87,7 +87,18 @@ export default {
   		animation: {
   			'accordion-down': 'accordion-down 0.2s ease-out',
   			'accordion-up': 'accordion-up 0.2s ease-out'
-  		}
+  		},
+		fontSize: {
+			'xxs': '0.625rem',
+		},
+		utilities: {
+			'.scrollbar-none': {
+			  'scrollbar-width': 'none',
+			  '&::-webkit-scrollbar': {
+				display: 'none',
+			  },
+			},
+		  },
   	}
   },
   plugins: [require("tailwindcss-animate")],
