@@ -1,5 +1,7 @@
 import { format } from 'date-fns'
 import React from 'react'
+import HexContainer from './HexContainer'
+import Headlines from './Headlines'
 
 type ExperienceType={
   position: string,
@@ -34,14 +36,16 @@ const TestingData=[
 ]
 const ExperienceTab = () => {
   return (
-    <div className='flex w-full flex-col relative justify-between border-b-2 border-b-gray-400 py-3'>
-      <h1 className='text-black text-sm font-bold'>Work Experience</h1>
-      <div className='flex flex-col gap-1'>
-        {TestingData.map((experience,index)=>{
-          return <ExperienceCard key={index} experience={experience}/>
-        })}
+    <HexContainer>
+      <div className='flex w-full flex-col relative justify-between py-3'>
+        <Headlines title="Work Experience"/>
+        <div className='flex flex-col gap-1'>
+          {TestingData.map((experience,index)=>{
+            return <ExperienceCard key={index} experience={experience}/>
+          })}
+        </div>
       </div>
-    </div>
+    </HexContainer>
   )
 }
 

@@ -1,5 +1,8 @@
 import { format } from 'date-fns'
 import React from 'react'
+import HexContainer from './HexContainer';
+import Headlines from './Headlines';
+import { useAppStore } from '@/zustand';
 
 const SkillsTestData = [
     "JavaScript ES6",
@@ -22,17 +25,22 @@ const SkillsTestData = [
 
 
 const SkillSection = () => {
+  const resumeState = useAppStore((state) => state.resumeState);
+  const { colorHex } = resumeState
+  
   return (
-    <div className='flex w-full flex-col relative justify-between border-b-2 border-b-gray-400 py-3'>
-      <h1 className='text-black text-sm font-bold'>Skills</h1>
-      <div className='flex flex-wrap gap-2 py-2'>
-        {SkillsTestData.map((skill,index)=>{
-          return (
-            <p key={index} className='bg-black text-white p-1 px-2 text-xxs rounded-lg'>{skill}</p>
-          )
-        })}
+    <HexContainer>
+      <div className='flex w-full flex-col relative justify-between py-3'>
+        <Headlines title="Skills"/>
+        <div className='flex flex-wrap gap-2 py-2'>
+          {SkillsTestData.map((skill,index)=>{
+            return (
+              <p key={index} style={{backgroundColor:colorHex}} className='text-white p-1 px-2 text-xxs rounded-lg'>{skill}</p>
+            )
+          })}
+        </div>
       </div>
-    </div>
+    </HexContainer>
   )
 }
 

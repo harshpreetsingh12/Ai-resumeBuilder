@@ -5,7 +5,7 @@ type RootLayoutProps = {
 };
 
 const MainLayout = ({ children }: RootLayoutProps) => {
-  return <div className="container mx-auto my-24">{children}</div>;
+  return <div className="w-screen my-24">{children}</div>;
 };
 
 export default MainLayout;

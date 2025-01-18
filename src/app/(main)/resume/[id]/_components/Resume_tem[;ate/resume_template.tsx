@@ -40,7 +40,7 @@ const Resume_template = ({resumeData}:ResumePageProps) => {
   }, [resumeData]);
   
   return (
-    <div className='py-6 bg-gray-100 px-10 h-screen overflow-scroll scrollbar-none'>
+    <div className='py-6 bg-gray-100 px-3 xl:px-10 h-screen overflow-scroll scrollbar-none'>
       <div className='bg-white rounded-md px-2 lg:px-6 py-2 shadow-gray-400 shadow-sm mb-24'> 
         <ResumeHead/> 
         <SummarySection/> 
