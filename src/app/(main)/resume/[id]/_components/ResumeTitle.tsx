@@ -7,9 +7,12 @@ import { useAppStore } from '@/zustand';
 const ResumeTitle = () => {
     const resumeState = useAppStore((state) => state.resumeState);
     
+    const handleTitleChange =()=>{
+
+    }
     return (
-        <div>
-            <Input className='px-0 border-b-2 border-none' value={resumeState.title} />
+        <div className=''>
+            <Input className='px-0 border-b-2 border-black border-none' value={resumeState.title} onChange={handleTitleChange} />
         </div>
     )
 }

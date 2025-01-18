@@ -2,6 +2,7 @@
 
 import { useAppStore } from "@/zustand";
 import React, { useEffect } from "react";
+import ResumeTitle from "./ResumeTitle";
 
 type ResumeType = {
   id: string;
@@ -28,9 +29,9 @@ type ResumePageProps = {
 const Resume_Generator = ({ resumeData }: ResumePageProps) => {
   const updateResumeData = useAppStore((state) => state.updateResumeData);
   const resumeState = useAppStore((state) => state.resumeState);
-
-
-  return <div className="">Left</div>;
+  return <div className="">
+     <ResumeTitle/>
+  </div>;
 };
 
 export default Resume_Generator;
