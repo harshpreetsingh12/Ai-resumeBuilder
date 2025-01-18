@@ -26,6 +26,7 @@ const TempresumeData= {
   country: "IN",
   phone: "+91 8630228697",
   email: "harshpreets362@gmail.com",
+  boarderStyle:"full"
 }
 
 const ResumePage = async ({ params }: ResumePageProps) => {
