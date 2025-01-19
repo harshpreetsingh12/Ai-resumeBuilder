@@ -1,12 +1,14 @@
 import { GoogleGenerativeAI } from "@google/generative-ai";
 
+export async function generateSummay(input: string) {
+  //pass on the basic details to genereate summary
+  try {
+    const genAi = new GoogleGenerativeAI(
+      process.env.NEXT_PUBLIC_GEMINI_API_KEY || "",
+    );
+    const model = genAi.getGenerativeModel({ model: "gemini-1.5-flash" });
 
-export async function generateSummay(input:string) { //pass on the basic details to genereate summary
-    try {
-      const genAi = new GoogleGenerativeAI(process.env.NEXT_PUBLIC_GEMINI_API_KEY || "");
-      const model = genAi.getGenerativeModel({ model: "gemini-1.5-flash" });
-  
-      const prompt = `
+    const prompt = `
       Based on the following input, create a concise, professional resume summary in 400-500 characters. The summary should be tailored to highlight the individual's key skills, achievements, and professional experience. Ensure the tone is formal and engaging. Avoid generic phrases and keep it relevant to the provided information.
 
       Input: "${input}"
@@ -18,27 +20,28 @@ export async function generateSummay(input:string) { //pass on the basic details
 
       Generate summary:
     `;
-  
-      try {
-        const result = await model.generateContent(prompt);
-        const finalOutput = result.response.text();
-        return finalOutput;
-      } catch (parseError) {
-        console.error("Error parsing JSON response:", parseError);
-        return [];
-      }
-    } catch (error) {
-      console.error("Error generating summary :", error);
-      throw new Error("Failed to generate summary");
+
+    try {
+      const result = await model.generateContent(prompt);
+      const finalOutput = result.response.text();
+      return finalOutput;
+    } catch (parseError) {
+      console.error("Error parsing JSON response:", parseError);
+      return [];
     }
+  } catch (error) {
+    console.error("Error generating summary :", error);
+    throw new Error("Failed to generate summary");
   }
-  
+}
 
 // experience section
 
 export const generateExperience = async (input: string) => {
   try {
-    const genAi = new GoogleGenerativeAI(process.env.NEXT_PUBLIC_GEMINI_API_KEY || "");
+    const genAi = new GoogleGenerativeAI(
+      process.env.NEXT_PUBLIC_GEMINI_API_KEY || "",
+    );
     const model = genAi.getGenerativeModel({ model: "gemini-1.5-flash" });
 
     const prompt = `Create a professional and polished summary of the provided input. Focus on highlighting the individual's key responsibilities, accomplishments, and expertise in a formal and engaging tone. Avoid generic language and ensure the content is concise, relevant, and impactful. and give a '/n' after every point completion.
@@ -63,20 +66,19 @@ export const generateExperience = async (input: string) => {
       console.error("Error parsing JSON response:", parseError);
       return [];
     }
+  } catch (error) {
+    console.log("Error in generateExperience ", error);
+    throw new Error("Failed to generateExperience");
   }
-  catch (error) {
-      console.log("Error in generateExperience ", error);
-      throw new Error("Failed to generateExperience");
-    }
-}
-
-
+};
 
 // project section
 
 export const generateProjects = async (input: string) => {
   try {
-    const genAi = new GoogleGenerativeAI(process.env.NEXT_PUBLIC_GEMINI_API_KEY || "");
+    const genAi = new GoogleGenerativeAI(
+      process.env.NEXT_PUBLIC_GEMINI_API_KEY || "",
+    );
     const model = genAi.getGenerativeModel({ model: "gemini-1.5-flash" });
     const prompt = `Using the provided input, craft a polished and concise project description section. Each project should highlight its objectives, key contributions, and measurable outcomes. Maintain a formal and engaging tone, ensuring relevance and specificity to the provided information. and give a '/n' after every point completion.
       
@@ -92,7 +94,7 @@ export const generateProjects = async (input: string) => {
     try {
       const result = await model.generateContent(prompt);
       const finalOutput = result.response.text();
-        console.log(finalOutput);
+      console.log(finalOutput);
       return finalOutput;
     } catch (parseError) {
       console.error("Error parsing JSON response:", parseError);
