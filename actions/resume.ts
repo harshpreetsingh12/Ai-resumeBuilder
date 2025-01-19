@@ -15,6 +15,11 @@ export async function createResume(){
                 userId:user.id,
             }
         });
+
+        await db.resumeContent.create({
+            data: { resumeId: document.id }
+        });
+
         revalidatePath("/dashboard");
         return {success:true, data:document}
     }

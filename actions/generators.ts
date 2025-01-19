@@ -64,7 +64,7 @@ export const generateExperience = async (input: string) => {
       return finalOutput;
     } catch (parseError) {
       console.error("Error parsing JSON response:", parseError);
-      return [];
+      return "";
     }
   } catch (error) {
     console.log("Error in generateExperience ", error);
