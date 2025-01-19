@@ -1,53 +1,110 @@
 import { generateExperience } from "#/generators";
+import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
-import React, { useState } from "react";
+import { experienceSchema } from "@/lib/schemaValidations";
+import { useAppStore } from "@/zustand";
+import { AudioLines, Trash } from "lucide-react";
+import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { Tooltip, TooltipContent, TooltipProvider } from "@/components/ui/tooltip";
+import { TooltipTrigger } from "@radix-ui/react-tooltip";
+import { Input } from "@/components/ui/input";
+import { toast } from "sonner";
 
 type ExperienceProps = {
   position: string;
   companyName: string;
-  startDate: Date;
+  startDate: Date | string;
   endDate: Date | string;
-  content: string[];
+  content: string;
+  location: string;
 };
 
-const ExperienceForm = () => {
+type ExperienceCompProps = {
+  experience: ExperienceProps;
+  position:number;
+};
+
+const MultiExperienceForm= ()=>{
+  const experiences = useAppStore((state) => state.experiences);
+  const updateExperienceData = useAppStore((state) => state.updateExperienceData);
+
+  const AddNewExperience=()=>{
+    const defaultExperience={
+      position: "",
+      companyName: "",
+      startDate: '',
+      endDate: '',
+      content: ``,
+      location:''
+    }
+    updateExperienceData([...experiences, defaultExperience])
+  }
+
+  return (
+    <div className="flex flex-col gap-5 py-4 items-center">
+      {
+        experiences.map((experience,index)=>{
+          return <ExperienceForm key={index} experience={experience} position={index}/>
+        })
+      }
+      {experiences.length<3 ?
+        <Button onClick={AddNewExperience} variant={"outline"} className="w-fit">
+          Add Experience
+        </Button>
+      :null}
+  </div>
+  )
+}
+
+export default MultiExperienceForm;
+
+
+const ExperienceForm = ({experience,position}:ExperienceCompProps) => { 
   const {
     register,
     handleSubmit,
     watch,
     setValue,
-    reset,
     formState: { errors },
-  } = useForm();
-  const [experiences, setExperiences] = useState<ExperienceProps>([]); // Store multiple experiences
-  const [generatedExperience, setGeneratedExperience] = useState("");
+  } = useForm(
+    {
+      resolver: zodResolver(experienceSchema),
+      defaultValues:experience
+    }
+  );
+
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
+  const updateExperienceData = useAppStore((state) => state.updateExperienceData);
+  const experiences = useAppStore((state) => state.experiences);
 
-  const onSubmit = (data: any) => {
-    setExperiences((prev) => [...prev, data]); // Add new experience to the list
-    reset(); // Clear form fields
-    setGeneratedExperience(""); // Clear AI-generated content
+  const handleUpdateCurrentExperience=(data:ExperienceProps)=>{
+    const newExperience = [...experiences]
+    newExperience[position]= data
+    updateExperienceData(newExperience)
+  }
+
+  const removeExperience=()=>{
+    const newExperience = experiences.filter((_, index)=> index!==position)
+    updateExperienceData(newExperience)
+  }
+
+  const onSubmit = (data: ExperienceProps) => {
+    handleUpdateCurrentExperience(data)
   };
 
   const handleGenerateExperience = async () => {
     setLoading(true);
-    setError(""); // Clear previous error
+    setError("");
     try {
-      const input = watch(); // Collect all form inputs
-      const userInput = `
-      Company Name: ${input.companyName || "N/A"}
-      Job Title: ${input.jobTitle || "N/A"}
-      Location: ${input.location || "N/A"}
-      Start Date: ${input.startDate || "N/A"}
-      End Date: ${input.endDate || "N/A"}
-      Currently Working Here: ${input.currentlyWorking ? "Yes" : "No"}
-      Details: ${input.details || ""}
-      `;
+      const input = watch();
+      const userInput = `${input.content || ""}`;
+
       const output = await generateExperience(userInput);
-      setGeneratedExperience(output);
-      setValue("details", output); // Populate the Textarea with AI-generated output
+      toast.success('Please save the content if its good!')
+      setValue("content", output);
     } catch (err) {
       console.error("Error generating experience:", err);
       setError("Failed to generate experience. Please try again.");
@@ -57,47 +114,35 @@ const ExperienceForm = () => {
   };
 
   return (
-    <div className="w-full mx-auto p-6 bg-white shadow-md rounded-md overflow-y-scroll">
-      <h1 className="text-2xl font-bold mb-2">
-        Tell us about your experiences
+    <div className="w-full mx-auto p-6 bg-white shadow-md border-gray-300 border-[1px] bord rounded-md text-sm mb-4 relative">
+      <h1 className="text-sm font-bold mb-5">
+        Work Experience {position+1}
       </h1>
-      <h2 className="text-gray-600 mb-6">
-        You can add multiple job experiences.
-      </h2>
 
-      {/* Scrollable Experience List */}
-      <div className="max-h-96 overflow-y-auto mb-4 border rounded-md p-4 bg-gray-100">
-        {experiences.length > 0 ? (
-          experiences.map((exp, index) => (
-            <div key={index} className="mb-4 border-b pb-2">
-              <h3 className="font-semibold">
-                {exp.jobTitle} at {exp.companyName}
-              </h3>
-              <p>{exp.location}</p>
-              <p>
-                {exp.startDate} -{" "}
-                {exp.currentlyWorking ? "Present" : exp.endDate}
-              </p>
-              <p>{exp.details}</p>
-            </div>
-          ))
-        ) : (
-          <p className="text-gray-500">No experiences added yet.</p>
-        )}
-      </div>
-
-      {/* Form */}
+      <span className="absolute top-6 right-6 cursor-pointer" onClick={removeExperience} >
+        <TooltipProvider>
+          <Tooltip>
+            <TooltipTrigger>
+                <Trash size={12} color="red"/>
+            </TooltipTrigger>
+            <TooltipContent>
+              <p>Delete Experience</p>
+            </TooltipContent>
+          </Tooltip>
+        </TooltipProvider>
+      </span>
+     
       <form onSubmit={handleSubmit(onSubmit)}>
         {/* Company Name */}
         <div className="mb-4">
-          <label className="block font-medium">Company Name:</label>
-          <input
+          <label className="block font-medium">Company Name</label>
+          <Input
             type="text"
-            className="w-full border rounded-md p-2"
+            className="p-2"
             {...register("companyName", {
               required: "Company name is required",
             })}
-            placeholder="e.g., Acme Corp"
+            placeholder="Eg: Acme Corp"
           />
           {errors.companyName && (
             <p className="text-red-500">{errors.companyName.message}</p>
@@ -106,26 +151,26 @@ const ExperienceForm = () => {
 
         {/* Job Title */}
         <div className="mb-4">
-          <label className="block font-medium">Job Title:</label>
-          <input
+          <label className="block font-medium">Job Title</label>
+          <Input
             type="text"
-            className="w-full border rounded-md p-2"
-            {...register("jobTitle", { required: "Job title is required" })}
-            placeholder="e.g., Software Engineer"
+            className="p-2"
+            {...register("position", { required: "Job title is required" })}
+            placeholder="Eg: Software Engineer"
           />
-          {errors.jobTitle && (
-            <p className="text-red-500">{errors.jobTitle.message}</p>
+          {errors.position && (
+            <p className="text-red-500">{errors.position.message}</p>
           )}
         </div>
 
         {/* Location */}
         <div className="mb-4">
-          <label className="block font-medium">Location:</label>
-          <input
+          <label className="block font-medium">Location</label>
+          <Input
             type="text"
-            className="w-full border rounded-md p-2"
+            className="p-2"
             {...register("location", { required: "Location is required" })}
-            placeholder="e.g., New York, NY"
+            placeholder="Eg: New York, NY"
           />
           {errors.location && (
             <p className="text-red-500">{errors.location.message}</p>
@@ -134,73 +179,69 @@ const ExperienceForm = () => {
 
         {/* Start Date */}
         <div className="mb-4">
-          <label className="block font-medium">Start Date:</label>
-          <input
+          <label className="block font-medium">Start Date</label>
+          <Input
             type="date"
-            className="w-full border rounded-md p-2"
-            {...register("startDate", { required: "Start date is required" })}
+            className="p-2"
+            {...register("startDate")}
           />
           {errors.startDate && (
             <p className="text-red-500">{errors.startDate.message}</p>
           )}
         </div>
 
-        {/* End Date or Currently Working */}
+        <div className="mb-4">
+          <label className="block font-medium">End Date</label>
+          <Input
+            type="date"
+            className="w-full border rounded-md p-2"
+            {...register("endDate")}
+            disabled={watch("endDate") ==='Present'}
+            style={{opacity:watch("endDate") ==='Present' ?'0.6':'1'}}
+          />
+        </div>
+
         <div className="mb-4 flex items-center">
           <input
             type="checkbox"
             className="mr-2"
-            {...register("currentlyWorking")}
+            checked={watch("endDate") ==='Present' ?true:false}
             onChange={(e) =>
-              setValue("endDate", e.target.checked ? "" : watch("endDate"))
+              setValue("endDate", e.target.checked ? "Present" : new Date())
             }
+            
           />
           <label className="font-medium">I currently work here</label>
         </div>
-        {!watch("currentlyWorking") && (
-          <div className="mb-4">
-            <label className="block font-medium">End Date:</label>
-            <input
-              type="date"
-              className="w-full border rounded-md p-2"
-              {...register("endDate")}
-            />
-          </div>
-        )}
-
-        {/* Work Details */}
+     
         <div className="mb-4">
-          <label className="block font-medium">Details:</label>
+          <label className="block font-medium">Details</label>
           <Textarea
             className="w-full border rounded-md p-2"
-            {...register("details")}
-            value={generatedExperience}
-            onChange={(e) => setGeneratedExperience(e.target.value)}
+            {...register("content")}
+            rows={4}
             placeholder="Describe your responsibilities, achievements, etc."
           />
-          <button
-            type="button"
-            className="mt-2 text-white bg-blue-500 px-4 py-2 rounded-md"
-            onClick={handleGenerateExperience}
-            disabled={loading}
-          >
-            {loading ? "Generating..." : "AI Assist"}
-          </button>
           {error && <p className="text-red-500 mt-2">{error}</p>}
         </div>
 
-        {/* Submit Button */}
-        <div>
-          <button
+        <div className="flex gap-2">
+          <Button onClick={handleGenerateExperience} className='text-xs'>
+            {loading ? "Generating..." : "Enhance With Ai"} <AudioLines size={12}/>
+          </Button>
+
+          <Button
             type="submit"
-            className="w-full text-white bg-green-500 px-4 py-2 rounded-md"
+            variant={'ghost'}
+            className="py-2 rounded-md text-xs"
           >
-            Add Experience
-          </button>
+            Save
+          </Button>
         </div>
+
       </form>
     </div>
   );
 };
 
-export default ExperienceForm;
+

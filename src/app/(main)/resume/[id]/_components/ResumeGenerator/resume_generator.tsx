@@ -9,6 +9,7 @@ import { Button } from "@/components/ui/button";
 import PersonalInfo from "./PersonalInfo";
 import SkillForm from "./SkillForm";
 import SummaryForm from "./SummaryForm";
+import MultiExperienceForm from "./ExperienceForm";
 
 type ResumeType = {
   id: string;
@@ -36,14 +37,14 @@ const Resume_Generator = ({ resumeData }: ResumePageProps) => {
   const updateResumeData = useAppStore((state) => state.updateResumeData);
   const resumeState = useAppStore((state) => state.resumeState);
 
-  const [currentTab, setCurrentTab] = useState(GENERATOR_STEPS[0])
+  const [currentTab, setCurrentTab] = useState(GENERATOR_STEPS[2])
   
   const FormGenerator=()=>{
     switch (currentTab.key) {
 			case "resumeInfo":
 				return <ResumeInfoForm/>
 			case "workExperience":
-				return <ExperienceForm/>
+				return <MultiExperienceForm/>
 			case "personalInfo":
 				return <PersonalInfo/>
 			case "skills":
@@ -68,7 +69,7 @@ const Resume_Generator = ({ resumeData }: ResumePageProps) => {
 
   const FormUi= useMemo(()=>FormGenerator(), [currentTab])
   return (
-    <div className="px-3 xl:px-10 w-full flex flex-col h-[86vh]">
+    <div className="px-3 xl:px-10 w-full flex flex-col h-[86vh] overflow-y-scroll">
       <div className="flex justify-center">
         {GENERATOR_STEPS.map((gen,index)=>{
           return (
@@ -119,7 +120,7 @@ const GENERATOR_STEPS=[
     {
       title:'Work Experience',
       key:'workExperience',
-      description:'Add Your all work experiences'
+      description:'You can add multiple job experiences'
     },
     {
       title:'Education',

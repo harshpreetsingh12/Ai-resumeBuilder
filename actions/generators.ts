@@ -44,27 +44,27 @@ export const generateExperience = async (input: string) => {
     );
     const model = genAi.getGenerativeModel({ model: "gemini-1.5-flash" });
 
-    const prompt = `Create a professional and polished summary of the provided input. Focus on highlighting the individual's key responsibilities, accomplishments, and expertise in a formal and engaging tone. Avoid generic language and ensure the content is concise, relevant, and impactful. and give a '/n' after every point completion.
+    const prompt = `Create a professional and polished summary of the provided input. Focus on highlighting the individual's key responsibilities, accomplishments, and expertise in a formal and engaging tone. Keep the content concise, relevant, and impactful, with **exactly one line break after each point**. Each point should be not more then 120 characters have atleast 3-4 points.
 
     Input: "${input}"
-
+    
     Example output: 
     - Highlight key responsibilities and achievements.
-    - Include metrics or quantifiable accomplishments (e.g., "boosted sales by 20%").
-    - Mention specific tools, technologies, or skills used.
-    - Relate to the industry or field where the experience applies.
-
-    Provide a clear and engaging summary: 
-    `;
+    - Include specific metrics or quantifiable accomplishments (e.g., "improved user engagement by 30%").
+    - Mention specific tools, technologies, or skills used (e.g., React, Node.js, etc.).
+    - Relate to the specific industry or field (e.g., marketing technology, application development, etc.).
+    
+    Provide a clear, concise, and engaging summary with **one line break after each major point** and no additional line breaks.`;
+    
     try {
       const result = await model.generateContent(prompt);
-      console.log(result);
       const finalOutput = result.response.text();
-      console.log(finalOutput);
-      return finalOutput;
+      let cleanedContent = finalOutput.replace(/(\r?\n|\r){2,}/g, '\n');
+
+      return cleanedContent;
     } catch (parseError) {
       console.error("Error parsing JSON response:", parseError);
-      return [];
+      return "";
     }
   } catch (error) {
     console.log("Error in generateExperience ", error);
