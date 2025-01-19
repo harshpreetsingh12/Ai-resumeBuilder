@@ -7,8 +7,8 @@ import { useAppStore } from "@/zustand";
 type ExperienceType = {
   position: string;
   companyName: string;
-  startDate: Date;
-  endDate: Date | string;
+  startDate: string;
+  endDate: string;
   content: string;
   location:string;
 };
@@ -43,12 +43,15 @@ const ExperienceCard = ({ experience }: ExperienceCardType) => {
       <div className="flex justify-between pb-1">
         <h2 className="text-black text-xs font-bold">{position}</h2>
         <h2 className="text-black text-xs font-bold">
-          {format(new Date(startDate), "MMM yyyy")} -{" "}
+
+          {startDate.length>0 ?  format(startDate, "MMM yyyy") :""} -{" "}
+
           {endDate === "Present"
             ? endDate
-            : format(new Date(endDate), "MMM yyyy")}
+            : endDate.length>0?  format(new Date(endDate), "MMM yyyy"):''}
             &nbsp;
           / {location}
+
         </h2>
       </div>
       <div className="flex flex-col">
