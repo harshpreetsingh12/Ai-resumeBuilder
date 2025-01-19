@@ -35,7 +35,7 @@ const SkillForm = () => {
             <Input 
                 id="skill"
                 className='text-sm'
-                placeholder='Eg: Add SKills'
+                placeholder='Add SKills'
             />
             <Button variant={'ghost'} className="text-xs px-4 py-2">Add</Button>
         </div>
