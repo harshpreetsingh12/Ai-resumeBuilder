@@ -59,10 +59,10 @@ const ProjectCard= ({ project } :ProjectCardType) =>{
   return (
     <div className=' py-2'>
       <div className='flex justify-between pb-1'>
-        <h2 className='text-xs font-bold'>{projectName} &nbsp; &nbsp;
+        <h2 className='text-black text-xs font-bold'>{projectName} &nbsp; &nbsp;
             {skillesUsed.map((skill:string, index:number)=>{
                 return (
-                    <span className='font-normal' key={`skill_${index}`}> &bull; {skill}</span>
+                    <span className='text-black font-normal' key={`skill_${index}`}> &bull; {skill}</span>
                 )
             })}
         </h2>
@@ -75,7 +75,7 @@ const ProjectCard= ({ project } :ProjectCardType) =>{
       <div className='flex flex-col'>
         {content.map((content:any,index:number)=>{
           return (
-            <p key={`content_${index}`} className='text-xs'>- {content} </p>
+            <p key={`content_${index}`} className='text-black text-xs'>- {content} </p>
           )
         })}
       </div>
