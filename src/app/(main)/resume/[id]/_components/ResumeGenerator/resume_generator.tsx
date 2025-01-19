@@ -37,7 +37,7 @@ const Resume_Generator = ({ resumeData }: ResumePageProps) => {
   const updateResumeData = useAppStore((state) => state.updateResumeData);
   const resumeState = useAppStore((state) => state.resumeState);
 
-  const [currentTab, setCurrentTab] = useState(GENERATOR_STEPS[2])
+  const [currentTab, setCurrentTab] = useState(GENERATOR_STEPS[0])
   
   const FormGenerator=()=>{
     switch (currentTab.key) {
