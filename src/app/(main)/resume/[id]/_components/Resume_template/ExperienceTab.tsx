@@ -7,8 +7,8 @@ import { useAppStore } from "@/zustand";
 type ExperienceType = {
   position: string;
   companyName: string;
-  startDate: string;
-  endDate: string;
+  startDate: Date | string;
+  endDate: Date | string;
   content: string;
   location:string;
 };
