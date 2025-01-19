@@ -36,10 +36,6 @@ const DashboardPage = ({resumes}:DashBoardPageProps) => {
   } =useFetch(createResume);
   const router = useRouter()
 
-  function tempAi() {
-    generateProjects("todo list with crud operation in javascript.")
-  }
-
   useEffect(()=>{
     if(resumeData && !updateDefaultLoading ){
         if(resumeData.data?.id){
@@ -60,7 +56,7 @@ const DashboardPage = ({resumes}:DashBoardPageProps) => {
 
   return (
     <div>
-       <Button disabled={updateDefaultLoading} variant="outline" onClick={()=>tempAi()}>
+       <Button disabled={updateDefaultLoading} variant="outline" onClick={()=>createFuncFunction()}>
         New Resume
 
         <Plus  className="h-4 w-4" />

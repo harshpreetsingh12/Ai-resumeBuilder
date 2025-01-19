@@ -62,11 +62,12 @@ model ResumeContent{
    resume  Resume  @relation(fields: [resumeId], references: [id], onDelete: Cascade)
    
    // resume data
-   skills  String[]
-   socialData  Json
-   projectDetails Json
-   certifications Json
-   education Json
+   skills  String[]  @default([])
+   socialData  Json[]  @default([])
+   projectDetails Json[] @default([])
+   experience Json[] @default([])
+   certifications Json[] @default([])
+   education Json[] @default([])
 
   @@map("resume_content")
 }
