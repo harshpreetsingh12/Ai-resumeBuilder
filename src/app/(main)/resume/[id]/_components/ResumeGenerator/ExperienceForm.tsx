@@ -219,7 +219,7 @@ const ExperienceForm = ({experience,position}:ExperienceCompProps) => {
           <Textarea
             className="w-full border rounded-md p-2"
             {...register("content")}
-            rows={4}
+            rows={6}
             placeholder="Describe your responsibilities, achievements, etc."
           />
           {error && <p className="text-red-500 mt-2">{error}</p>}
