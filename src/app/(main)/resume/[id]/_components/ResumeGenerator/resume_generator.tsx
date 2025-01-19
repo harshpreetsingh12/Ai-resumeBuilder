@@ -10,6 +10,7 @@ import PersonalInfo from "./PersonalInfo";
 import SkillForm from "./SkillForm";
 import SummaryForm from "./SummaryForm";
 import MultiExperienceForm from "./ExperienceForm";
+import ProjectSection from "./ProjectSection";
 
 type ResumeType = {
   id: string;
@@ -47,10 +48,10 @@ const Resume_Generator = ({ resumeData }: ResumePageProps) => {
 				return <MultiExperienceForm/>
 			case "personalInfo":
 				return <PersonalInfo/>
-			case "skills":
+			case "skillsSummary":
 				return <SkillForm/>
-			case "summary":
-				return <SummaryForm/>
+			case "project":
+				return <ProjectSection/>
       default:
         return <div></div>
     }
@@ -128,13 +129,13 @@ const GENERATOR_STEPS=[
       description:"Add your educations"
     },
     {
-      title:'Skills',
-      key:'skills',
-      description:"Add relevant skills according to your position"
+      title:'Project',
+      key:'project',
+      description:'Add a Wonderful Projects'
     },
     {
-      title:'Summary',
-      key:'summary',
-      description:'Add a small summary about you'
+      title:'Summary & Skills',
+      key:'skillsSummary',
+      description:"Add relevant skills according to your position"
     },
 ]
