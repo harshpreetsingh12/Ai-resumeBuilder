@@ -6,6 +6,7 @@ import { ChevronRight } from "lucide-react";
 import ResumeInfoForm from "./ResumeInfoForm";
 import ExperienceForm from "./ExperienceForm";
 import { Button } from "@/components/ui/button";
+import PersonalInfo from "./PersonalInfo";
 
 type ResumeType = {
   id: string;
@@ -41,6 +42,8 @@ const Resume_Generator = ({ resumeData }: ResumePageProps) => {
 				return <ResumeInfoForm/>
 			case "workExperience":
 				return <ExperienceForm/>
+			case "personalInfo":
+				return <PersonalInfo/>
       default:
         return <div></div>
     }
