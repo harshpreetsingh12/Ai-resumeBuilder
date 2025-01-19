@@ -20,7 +20,6 @@ const SkillsTestData = [
     "RESTful APIs",
     "NPM",
     "Node.js",
-    
 ];
 
 
