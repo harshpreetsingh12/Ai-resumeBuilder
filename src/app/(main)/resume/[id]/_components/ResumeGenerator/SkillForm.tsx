@@ -38,6 +38,7 @@ const SkillForm = () => {
         try {
           const output = await generateSummay(summary);
           updateResumeData({summary:output});
+          toast.success('New summary Added!')
         } catch (err) {
           console.error("Error generating experience:", err);
         } finally {

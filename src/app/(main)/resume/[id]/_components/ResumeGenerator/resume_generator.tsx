@@ -4,13 +4,11 @@ import { useAppStore } from "@/zustand";
 import React, { useMemo, useState } from "react";
 import { ChevronRight } from "lucide-react";
 import ResumeInfoForm from "./ResumeInfoForm";
-import ExperienceForm from "./ExperienceForm";
 import { Button } from "@/components/ui/button";
 import PersonalInfo from "./PersonalInfo";
 import SkillForm from "./SkillForm";
-import SummaryForm from "./SummaryForm";
 import MultiExperienceForm from "./ExperienceForm";
-import ProjectSection from "./ProjectSection";
+import ProjectForm from "./ProjectForm";
 
 type ResumeType = {
   id: string;
@@ -51,7 +49,7 @@ const Resume_Generator = ({ resumeData }: ResumePageProps) => {
 			case "skillsSummary":
 				return <SkillForm/>
 			case "project":
-				return <ProjectSection/>
+				return <ProjectForm/>
       default:
         return <div></div>
     }
