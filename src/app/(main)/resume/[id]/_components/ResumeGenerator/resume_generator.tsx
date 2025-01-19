@@ -6,6 +6,9 @@ import { ChevronRight } from "lucide-react";
 import ResumeInfoForm from "./ResumeInfoForm";
 import ExperienceForm from "./ExperienceForm";
 import { Button } from "@/components/ui/button";
+import PersonalInfo from "./PersonalInfo";
+import SkillForm from "./SkillForm";
+import SummaryForm from "./SummaryForm";
 
 type ResumeType = {
   id: string;
@@ -41,6 +44,12 @@ const Resume_Generator = ({ resumeData }: ResumePageProps) => {
 				return <ResumeInfoForm/>
 			case "workExperience":
 				return <ExperienceForm/>
+			case "personalInfo":
+				return <PersonalInfo/>
+			case "skills":
+				return <SkillForm/>
+			case "summary":
+				return <SummaryForm/>
       default:
         return <div></div>
     }
@@ -119,7 +128,8 @@ const GENERATOR_STEPS=[
     },
     {
       title:'Skills',
-      key:"Add relevant skills according to your position"
+      key:'skills',
+      description:"Add relevant skills according to your position"
     },
     {
       title:'Summary',

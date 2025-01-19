@@ -54,14 +54,14 @@ const ExperienceCard= ({ education } :EducationCardType) =>{
   return (
     <div className=' py-2'>
       <div className='flex justify-between pb-1'>
-        <h2 className='text-xs font-bold'>{courseName}</h2>
-        <p className='text-xs font-bold'>{format(new Date(startDate), "MMM yyyy") } - {endDate==='Present'? endDate : format(new Date(endDate), "MMM yyyy")}</p>
+        <h2 className='text-black text-xs font-bold'>{courseName}</h2>
+        <p className='text-black text-xs font-bold'>{format(new Date(startDate), "MMM yyyy") } - {endDate==='Present'? endDate : format(new Date(endDate), "MMM yyyy")}</p>
       </div>
       <div className='flex flex-col'>
-        <h2 className='text-xs mb-1'>{schoolName}</h2>
+        <h2 className='text-black text-xs mb-1'>{schoolName}</h2>
         {content.map((content:any,index:number)=>{
           return (
-            <p key={index} className='text-xs'>- {content} </p>
+            <p key={index} className='text-black text-xs'>- {content} </p>
           )
         })}
       </div>
