@@ -3,42 +3,24 @@ import Link from 'next/link'
 import React from 'react'
 import HexContainer from './HexContainer'
 import Headlines from './Headlines'
+import { useAppStore } from '@/zustand'
 
 type ProjectType={
   projectName: string,
   projectLink: string,
-  content:string[],
-  skillesUsed: string[]
+  content:string,
+  skillsUsed: string[]
 }
 
-const TestingData=[
-  {
-    projectName: "Uber Clone",
-    projectLink: "https://yoursavior.netlify.app/",
-    content:[
-      'Developed workflow management features allowing teams to collaborate',
-      'Designed and build a dynamic organization admin dashboard featuring advanced graphical data visualization.'
-    ],
-    skillesUsed:['Javacript', "React", "Next"]
-  },
-  {
-    projectName: "Loom 2.0",
-    projectLink: "https://yoursavior.netlify.app/",
-    content:[
-        'Designed and build a dynamic organization admin dashboard featuring advanced graphical data visualization.',
-        'Developed workflow management features allowing teams to collaborate',
-    ],
-    skillesUsed:['Javacript', "React", "Next"]
-  },
-]
-
 const ProjectSection = () => {
+  const projects = useAppStore((state) => state.projects);
+  
   return (
     <HexContainer>
       <div className='flex w-full flex-col relative justify-between py-3'>
         <Headlines title="Projects"/>
         <div className='flex flex-col gap-1'>
-          {TestingData.map((project,index)=>{
+          {projects.map((project,index)=>{
             return <ProjectCard key={index} project={project}/>
           })}
         </div>
@@ -54,13 +36,13 @@ type ProjectCardType={
 }
 
 const ProjectCard= ({ project } :ProjectCardType) =>{
-  const {projectName, projectLink, skillesUsed, content}=project
+  const {projectName, projectLink, skillsUsed, content}=project
   
   return (
     <div className=' py-2'>
       <div className='flex justify-between pb-1'>
         <h2 className='text-black text-xs font-bold'>{projectName} &nbsp; &nbsp;
-            {skillesUsed.map((skill:string, index:number)=>{
+            {skillsUsed.map((skill:string, index:number)=>{
                 return (
                     <span className='text-black font-normal' key={`skill_${index}`}> &bull; {skill}</span>
                 )
@@ -73,11 +55,7 @@ const ProjectCard= ({ project } :ProjectCardType) =>{
         </p>
       </div>
       <div className='flex flex-col'>
-        {content.map((content:any,index:number)=>{
-          return (
-            <p key={`content_${index}`} className='text-black text-xs'>- {content} </p>
-          )
-        })}
+        <p className='text-black text-xs whitespace-pre-line'> {content} </p>
       </div>
     </div>
   )

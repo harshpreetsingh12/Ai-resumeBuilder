@@ -1,6 +1,6 @@
 import React from 'react'
 
-const ProjectSection = () => {
+const ProjectForm = () => {
   return (
     <div>
       
@@ -8,4 +8,4 @@ const ProjectSection = () => {
   )
 }
 
-export default ProjectSection
+export default ProjectForm
