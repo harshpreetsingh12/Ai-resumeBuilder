@@ -1,7 +1,7 @@
-import { generateExperience, generateProjects } from "#/generators";
+import { generateProjects } from "#/generators";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
-import { experienceSchema, projectSchema } from "@/lib/schemaValidations";
+import { projectSchema } from "@/lib/schemaValidations";
 import { useAppStore } from "@/zustand";
 import { AudioLines, Trash, X } from "lucide-react";
 import React, { useState } from "react";
