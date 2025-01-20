@@ -12,3 +12,10 @@ export const experienceSchema = z
     content: z.string({ required_error: "Details is required" })
     })
 ;
+
+export const projectSchema = z.object({
+  projectName: z.string().min(1, "Project Name is required"),
+  projectLink: z.string().url("Invalid URL").optional(), 
+  content: z.string().min(1, "Details are required"),
+  skillsUsed: z.array(z.string()).optional(),
+});
