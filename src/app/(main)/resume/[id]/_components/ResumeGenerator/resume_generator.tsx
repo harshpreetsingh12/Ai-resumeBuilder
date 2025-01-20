@@ -129,7 +129,7 @@ const GENERATOR_STEPS=[
     {
       title:'Project',
       key:'project',
-      description:'Add a Wonderful Projects'
+      description:'Add some Wonderful Projects'
     },
     {
       title:'Summary & Skills',

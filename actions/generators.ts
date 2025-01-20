@@ -80,25 +80,28 @@ export const generateProjects = async (input: string) => {
       process.env.NEXT_PUBLIC_GEMINI_API_KEY || "",
     );
     const model = genAi.getGenerativeModel({ model: "gemini-1.5-flash" });
-    const prompt = `Using the provided input, craft a polished and concise project description section. Each project should highlight its objectives, key contributions, and measurable outcomes. Maintain a formal and engaging tone, ensuring relevance and specificity to the provided information. and give a '/n' after every point completion.
-      
+    
+    const prompt =  `Using the provided input, craft a polished and concise project description section. Highlight the project's objectives, contributions, and outcomes in **plain sentences without labels like "Objective:", "Key Contributions:", or "Outcomes:"**. Each sentence should be concise, impactful, and no more than 120 characters. Use a **single line break with no extra gaps** after each point.
+
     Input: "${input}"
-
-    Example output: 
-    - Describes: little describe and descriptive  for the project.
-    - Key Contributions: Specific roles or tasks undertaken by the individual.
-    - Outcomes: Measurable achievements, impact, or results (e.g., improved process efficiency by 30%).
-
-    Generate Summary:
-    `;
+    
+    Example output:
+    - Streamlined team workflows and enhanced admin efficiency.
+    - Developed workflow tools and a data visualization dashboard.
+    - Improved collaboration and facilitated data-driven decision-making.
+    - Boosted productivity with efficient workflows.
+    
+    Provide a clear, concise, and engaging summary following the specified format.`;
+    
     try {
       const result = await model.generateContent(prompt);
       const finalOutput = result.response.text();
-      console.log(finalOutput);
+      console.log(finalOutput)
+    
       return finalOutput;
     } catch (parseError) {
       console.error("Error parsing JSON response:", parseError);
-      return [];
+      return '';
     }
   } catch (error) {
     console.log("Error on generate projects ", error);
