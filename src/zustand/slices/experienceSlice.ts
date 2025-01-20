@@ -6,12 +6,12 @@ type ExperienceType = {
   startDate: Date | string;
   endDate: Date | string;
   content: string;
-  location:string;
+  location: string;
 };
 
 export interface ExperienceState {
-    experiences: ExperienceType[];
-    updateExperienceData: (data: ExperienceType[]) => void;
+  experiences: ExperienceType[];
+  updateExperienceData: (data: ExperienceType[]) => void;
 }
 
 export const experienceSlice: StateCreator<ExperienceState> = (set) => ({
@@ -19,29 +19,29 @@ export const experienceSlice: StateCreator<ExperienceState> = (set) => ({
   updateExperienceData: (data) =>
     set((state) => ({
       ...state,
-      experiences: data, 
+      experiences: data,
     })),
 });
 
-const DefaultState=[
+const DefaultState = [
   {
-    position: "Software Engieer",
+    position: "Software Engineer",
     companyName: "i-Resonate",
     startDate: "2025-03-10",
     endDate: "2022-05-10",
     content: `- Engineered and integrated live marketing applications with major social media 
       - platforms (Facebook, LinkedIn, Instagram), streamlining user interactions and enhancing
       - Designed and build a dynamic organization admin dashboard featuring advanced graphical data visualization.`,
-    location:'IN'
+    location: "IN",
   },
   {
-    position: "Software Engieer",
+    position: "Software Engineer",
     companyName: "i-Resonate",
-    startDate:"2025-03-10",
+    startDate: "2025-03-10",
     endDate: "Present",
     content: `- Engineered and integrated live marketing applications with major social media 
     - platforms (Facebook, LinkedIn, Instagram), streamlining user interactions and enhancing
     - Designed and build a dynamic organization admin dashboard featuring advanced graphical data visualization.`,
-    location:'IN'
+    location: "IN",
   },
-]
+];

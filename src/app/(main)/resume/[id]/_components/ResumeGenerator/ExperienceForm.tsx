@@ -4,10 +4,14 @@ import { Textarea } from "@/components/ui/textarea";
 import { experienceSchema } from "@/lib/schemaValidations";
 import { useAppStore } from "@/zustand";
 import { AudioLines, Trash } from "lucide-react";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Tooltip, TooltipContent, TooltipProvider } from "@/components/ui/tooltip";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+} from "@/components/ui/tooltip";
 import { TooltipTrigger } from "@radix-ui/react-tooltip";
 import { Input } from "@/components/ui/input";
 import { toast } from "sonner";
@@ -23,76 +27,85 @@ type ExperienceProps = {
 
 type ExperienceCompProps = {
   experience: ExperienceProps;
-  position:number;
+  position: number;
 };
 
-const MultiExperienceForm= ()=>{
+const MultiExperienceForm = () => {
   const experiences = useAppStore((state) => state.experiences);
-  const updateExperienceData = useAppStore((state) => state.updateExperienceData);
+  const updateExperienceData = useAppStore(
+    (state) => state.updateExperienceData,
+  );
 
-  const AddNewExperience=()=>{
-    const defaultExperience={
+  const AddNewExperience = () => {
+    const defaultExperience = {
       position: "",
       companyName: "",
-      startDate: '',
-      endDate: '',
+      startDate: "",
+      endDate: "",
       content: ``,
-      location:''
-    }
-    updateExperienceData([...experiences, defaultExperience])
-  }
+      location: "",
+    };
+    updateExperienceData([...experiences, defaultExperience]);
+  };
 
   return (
     <div className="flex flex-col gap-5 py-4 items-center">
-      {
-        experiences.map((experience,index)=>{
-          return <ExperienceForm key={index} experience={experience} position={index}/>
-        })
-      }
-      {experiences.length<3 ?
-        <Button onClick={AddNewExperience} variant={"outline"} className="w-fit">
+      {experiences.map((experience, index) => {
+        return (
+          <ExperienceForm
+            key={index}
+            experience={experience}
+            position={index}
+          />
+        );
+      })}
+      {experiences.length < 3 ? (
+        <Button
+          onClick={AddNewExperience}
+          variant={"outline"}
+          className="w-fit"
+        >
           Add Experience
         </Button>
-      :null}
-  </div>
-  )
-}
+      ) : null}
+    </div>
+  );
+};
 
 export default MultiExperienceForm;
 
-
-const ExperienceForm = ({experience,position}:ExperienceCompProps) => { 
+const ExperienceForm = ({ experience, position }: ExperienceCompProps) => {
   const {
     register,
     handleSubmit,
     watch,
     setValue,
     formState: { errors },
-  } = useForm(
-    {
-      resolver: zodResolver(experienceSchema),
-      defaultValues:experience
-    }
-  );
+  } = useForm({
+    resolver: zodResolver(experienceSchema),
+    defaultValues: experience,
+  });
 
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
-  const updateExperienceData = useAppStore((state) => state.updateExperienceData);
+  const updateExperienceData = useAppStore(
+    (state) => state.updateExperienceData,
+  );
   const experiences = useAppStore((state) => state.experiences);
 
-  const handleUpdateCurrentExperience=(data:ExperienceProps)=>{
-    const newExperience = [...experiences]
-    newExperience[position]= data
-    updateExperienceData(newExperience)
-  }
+  const handleUpdateCurrentExperience = (data: ExperienceProps) => {
+    const newExperience = [...experiences];
+    newExperience[position] = data;
+    updateExperienceData(newExperience);
+  };
 
-  const removeExperience=()=>{
-    const newExperience = experiences.filter((_, index)=> index!==position)
-    updateExperienceData(newExperience)
-  }
+  const removeExperience = () => {
+    const newExperience = experiences.filter((_, index) => index !== position);
+    updateExperienceData(newExperience);
+  };
 
   const onSubmit = (data: ExperienceProps) => {
-    handleUpdateCurrentExperience(data)
+    handleUpdateCurrentExperience(data);
   };
 
   const handleGenerateExperience = async () => {
@@ -103,7 +116,7 @@ const ExperienceForm = ({experience,position}:ExperienceCompProps) => {
       const userInput = `${input.content || ""}`;
 
       const output = await generateExperience(userInput);
-      toast.success('Please save the content if its good!')
+      toast.success("Please save the content if its good!");
       setValue("content", output);
     } catch (err) {
       console.error("Error generating experience:", err);
@@ -115,15 +128,16 @@ const ExperienceForm = ({experience,position}:ExperienceCompProps) => {
 
   return (
     <div className="w-full mx-auto p-6 bg-white shadow-md border-gray-300 border-[1px] bord rounded-md text-sm mb-4 relative">
-      <h1 className="text-sm font-bold mb-5">
-        Work Experience {position+1}
-      </h1>
+      <h1 className="text-sm font-bold mb-5">Work Experience {position + 1}</h1>
 
-      <span className="absolute top-6 right-6 cursor-pointer" onClick={removeExperience} >
+      <span
+        className="absolute top-6 right-6 cursor-pointer"
+        onClick={removeExperience}
+      >
         <TooltipProvider>
           <Tooltip>
             <TooltipTrigger>
-                <Trash size={12} color="red"/>
+              <Trash size={14} color="red" />
             </TooltipTrigger>
             <TooltipContent>
               <p>Delete Experience</p>
@@ -131,7 +145,7 @@ const ExperienceForm = ({experience,position}:ExperienceCompProps) => {
           </Tooltip>
         </TooltipProvider>
       </span>
-     
+
       <form onSubmit={handleSubmit(onSubmit)}>
         {/* Company Name */}
         <div className="mb-4">
@@ -180,11 +194,7 @@ const ExperienceForm = ({experience,position}:ExperienceCompProps) => {
         {/* Start Date */}
         <div className="mb-4">
           <label className="block font-medium">Start Date</label>
-          <Input
-            type="date"
-            className="p-2"
-            {...register("startDate")}
-          />
+          <Input type="date" className="p-2" {...register("startDate")} />
           {errors.startDate && (
             <p className="text-red-500">{errors.startDate.message}</p>
           )}
@@ -196,8 +206,8 @@ const ExperienceForm = ({experience,position}:ExperienceCompProps) => {
             type="date"
             className="w-full border rounded-md p-2"
             {...register("endDate")}
-            disabled={watch("endDate") ==='Present'}
-            style={{opacity:watch("endDate") ==='Present' ?'0.6':'1'}}
+            disabled={watch("endDate") === "Present"}
+            style={{ opacity: watch("endDate") === "Present" ? "0.6" : "1" }}
           />
         </div>
 
@@ -205,15 +215,14 @@ const ExperienceForm = ({experience,position}:ExperienceCompProps) => {
           <input
             type="checkbox"
             className="mr-2"
-            checked={watch("endDate") ==='Present' ?true:false}
+            checked={watch("endDate") === "Present" ? true : false}
             onChange={(e) =>
               setValue("endDate", e.target.checked ? "Present" : new Date())
             }
-            
           />
           <label className="font-medium">I currently work here</label>
         </div>
-     
+
         <div className="mb-4">
           <label className="block font-medium">Details</label>
           <Textarea
@@ -226,22 +235,20 @@ const ExperienceForm = ({experience,position}:ExperienceCompProps) => {
         </div>
 
         <div className="flex gap-2">
-          <Button onClick={handleGenerateExperience} className='text-xs'>
-            {loading ? "Generating..." : "Enhance With Ai"} <AudioLines size={12}/>
+          <Button onClick={handleGenerateExperience} className="text-xs">
+            {loading ? "Generating..." : "Enhance With Ai"}{" "}
+            <AudioLines size={12} />
           </Button>
 
           <Button
             type="submit"
-            variant={'ghost'}
+            variant={"ghost"}
             className="py-2 rounded-md text-xs"
           >
             Save
           </Button>
         </div>
-
       </form>
     </div>
   );
 };
-
-
