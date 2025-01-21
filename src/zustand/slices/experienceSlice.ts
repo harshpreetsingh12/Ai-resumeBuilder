@@ -1,13 +1,5 @@
+import { ExperienceType } from "@/lib/schemaValidations";
 import { StateCreator } from "zustand";
-
-type ExperienceType = {
-  position: string;
-  companyName: string;
-  startDate: Date | string;
-  endDate: Date | string;
-  content: string;
-  location: string;
-};
 
 export interface ExperienceState {
   experiences: ExperienceType[];

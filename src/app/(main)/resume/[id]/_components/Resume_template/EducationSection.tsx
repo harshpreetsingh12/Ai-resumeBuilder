@@ -1,16 +1,7 @@
-import { format } from 'date-fns'
 import React from 'react'
 import Headlines from './Headlines'
 import { useAppStore } from '@/zustand'
-
-type EducationType = {
-  school: string;
-  field: string;
-  graduation: string;
-  location: string;
-  achievement: string;
-};
-
+import { EducationType } from '@/lib/schemaValidations'
 
 const EducationSection = () => {
   const educations = useAppStore((state) => state.education);

@@ -3,15 +3,7 @@ import React from "react";
 import HexContainer from "./HexContainer";
 import Headlines from "./Headlines";
 import { useAppStore } from "@/zustand";
-
-type ExperienceType = {
-  position: string;
-  companyName: string;
-  startDate: Date | string;
-  endDate: Date | string;
-  content: string;
-  location:string;
-};
+import { ExperienceType } from "@/lib/schemaValidations";
 
 const ExperienceTab = () => {
    const experiences = useAppStore((state) => state.experiences);
