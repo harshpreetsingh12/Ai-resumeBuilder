@@ -38,6 +38,13 @@ export type EducationType = {
   achievement: string;
 };
 
+export type ProjectType = {
+  projectName: string;
+  projectLink: string;
+  content: string;
+  skillsUsed:string[]
+};
+
 export type ResumeType = {
   id: string;
   userId: string;

@@ -1,7 +1,7 @@
 import { generateProjects } from "#/generators";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
-import { projectSchema } from "@/lib/schemaValidations";
+import { projectSchema, ProjectType } from "@/lib/schemaValidations";
 import { useAppStore } from "@/zustand";
 import { AudioLines, Trash, X } from "lucide-react";
 import React, { useState } from "react";
@@ -11,13 +11,6 @@ import { Tooltip, TooltipContent, TooltipProvider } from "@/components/ui/toolti
 import { TooltipTrigger } from "@radix-ui/react-tooltip";
 import { Input } from "@/components/ui/input";
 import { toast } from "sonner";
-
-type ProjectType = {
-  projectName: string;
-  projectLink: string;
-  content: string;
-  skillsUsed:string[]
-};
 
 type ProjectCompProps = {
   project: ProjectType;
