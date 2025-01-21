@@ -1,11 +1,6 @@
+import { ProjectType } from "@/lib/schemaValidations";
 import { StateCreator } from "zustand";
 
-type ProjectType = {
-    projectName: string;
-    projectLink: string;
-    content: string;
-    skillsUsed:string[]
-};
 
 export interface ProjectState {
     projects: ProjectType[];
