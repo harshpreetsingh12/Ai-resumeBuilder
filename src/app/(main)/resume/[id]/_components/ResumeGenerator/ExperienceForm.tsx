@@ -61,7 +61,7 @@ const MultiExperienceForm = () => {
       })}
       {experiences.length < 3 ? (
         <Button
-          onClick={AddNewExperience}
+          onClick={() => AddNewExperience}
           variant={"outline"}
           className="w-fit"
         >
