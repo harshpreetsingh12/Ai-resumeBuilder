@@ -6,16 +6,9 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
+import { EducationType } from "@/lib/schemaValidations";
 import { useAppStore } from "@/zustand";
 import { AudioLines, Trash } from "lucide-react";
-
-type EducationType = {
-  school: string;
-  field: string;
-  graduation: string;
-  location: string;
-  achievement: string;
-};
 
 const MultiEducationForm = () => {
   const education = useAppStore((state) => state.education);

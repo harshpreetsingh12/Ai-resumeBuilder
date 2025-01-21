@@ -1,12 +1,5 @@
+import { EducationType } from "@/lib/schemaValidations";
 import { StateCreator } from "zustand";
-
-type EducationType = {
-  school: string;
-  field: string;
-  graduation: string;
-  location: string;
-  achievement: string;
-};
 
 export interface EducationState {
   education: EducationType[];

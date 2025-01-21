@@ -7,24 +7,8 @@ import SkillSection from './SkillSection';
 import EducationSection from './EducationSection';
 import ProjectSection from './ProjectSection';
 import SummarySection from './SummarySection';
+import { ResumeType } from '@/lib/schemaValidations';
 
-type ResumeType = {
-  id: string;
-  userId: string;
-  title: string;
-  description: string;
-  photoUrl: string;
-  colorHex: string;
-  boarderStyle: string;
-  summary: string;
-  firstName: string;
-  lastName: string;
-  jobTitle: string;
-  city: string;
-  country: string;
-  phone: string;
-  email: string;
-};
  
 type ResumePageProps = {
   resumeData:ResumeType;

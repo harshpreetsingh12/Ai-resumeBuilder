@@ -19,3 +19,39 @@ export const projectSchema = z.object({
   content: z.string().min(1, "Details are required"),
   skillsUsed: z.array(z.string()).optional(),
 });
+
+
+export type ExperienceType = {
+  position: string;
+  companyName: string;
+  startDate: Date | string;
+  endDate: Date | string;
+  content: string;
+  location: string;
+};
+
+export type EducationType = {
+  school: string;
+  field: string;
+  graduation: string;
+  location: string;
+  achievement: string;
+};
+
+export type ResumeType = {
+  id: string;
+  userId: string;
+  title: string;
+  description: string;
+  photoUrl: string;
+  colorHex: string;
+  boarderStyle: string;
+  summary: string;
+  firstName: string;
+  lastName: string;
+  jobTitle: string;
+  city: string;
+  country: string;
+  phone: string;
+  email: string;
+};
