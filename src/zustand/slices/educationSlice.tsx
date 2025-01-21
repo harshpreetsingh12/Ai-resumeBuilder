@@ -26,14 +26,14 @@ const DefaultState = [
   {
     school: "Shri Guru Ram Rai University",
     field: "Bachelors of Computer Applications",
-    graduation: "June/2023",
+    graduation: "June 2020 - July 2024",
     location: "Dehradun,India",
     achievement: " Got 8.12 in my last acadameic session",
   },
   {
     school: "xyz school",
     field: "12th",
-    graduation: "June/20**",
+    graduation: "June 2020 - July 2024",
     location: "Dehradun,India",
     achievement: " Got 80% in my last acadameic session",
   },
