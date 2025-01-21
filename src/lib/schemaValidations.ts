@@ -62,3 +62,11 @@ export type ResumeType = {
   phone: string;
   email: string;
 };
+
+export type AutoResumeType = {
+  educations: EducationType[];
+  resumeData: ResumeType; // Assuming ResumeType has basic resume details
+  projectData: ProjectType[];
+  experienceData: ExperienceType[];
+  skills: string[];
+};
