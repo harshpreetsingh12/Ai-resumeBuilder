@@ -6,9 +6,11 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
-import { EducationType } from "@/lib/schemaValidations";
+import { EducationSchema, EducationType } from "@/lib/schemaValidations";
 import { useAppStore } from "@/zustand";
+import { zodResolver } from "@hookform/resolvers/zod";
 import { AudioLines, Trash } from "lucide-react";
+import { useForm } from "react-hook-form";
 
 const MultiEducationForm = () => {
   const education = useAppStore((state) => state.education);
@@ -25,16 +27,6 @@ const MultiEducationForm = () => {
     updateEducationData([...education, defaultEducation]);
   };
 
-  const handleUpdate = (
-    index: number,
-    key: keyof EducationType,
-    value: string,
-  ) => {
-    const updatedEducation = [...education];
-    updatedEducation[index] = { ...updatedEducation[index], [key]: value };
-    updateEducationData(updatedEducation);
-  };
-
   const deleteEducation = (index: number) => {
     const updatedEducation = education.filter((_, idx) => idx !== index);
     updateEducationData(updatedEducation);
@@ -47,7 +39,6 @@ const MultiEducationForm = () => {
           key={idx}
           index={idx}
           data={edu}
-          onUpdate={handleUpdate}
           onDelete={deleteEducation}
         />
       ))}
@@ -64,26 +55,38 @@ const MultiEducationForm = () => {
 const EducationSection = ({
   index,
   data,
-  onUpdate,
   onDelete,
 }: {
   index: number;
   data: EducationType;
-  onUpdate: (index: number, key: keyof EducationType, value: string) => void;
   onDelete: (index: number) => void;
 }) => {
-  const handleChange =
-    (key: keyof EducationType) =>
-    (event: React.ChangeEvent<HTMLInputElement>) => {
-      onUpdate(index, key, event.target.value);
-    };
+  const onSubmit = (data: EducationType) => {
+    handleUpdate(data);
+  };
+
+  const updateEducationData = useAppStore((state) => state.updateEducationData);
+  const education = useAppStore((state) => state.education);
+
+  const handleUpdate = (data: EducationType) => {
+    const updatedEducation = [...education];
+    updatedEducation[index] = data;
+    updateEducationData(updatedEducation);
+  };
+
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({
+    resolver: zodResolver(EducationSchema),
+    defaultValues: data,
+  });
 
   return (
     <div className="w-full mx-auto p-6 bg-white shadow-md border-gray-300 border-[1px] rounded-md text-sm relative">
       <div className="flex justify-between items-center mb-4">
-        <h3 className="text-sm font-bold mb-5">
-          Education {index + 1}
-        </h3>
+        <h3 className="text-sm font-bold mb-5">Education {index + 1}</h3>
         <span
           className="absolute top-6 right-6 cursor-pointer"
           onClick={() => onDelete(index)}
@@ -100,17 +103,24 @@ const EducationSection = ({
           </TooltipProvider>
         </span>
       </div>
-      <form className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+      <form
+        className="grid grid-cols-1 sm:grid-cols-2 gap-4"
+        onSubmit={handleSubmit(onSubmit)}
+      >
         {/* School */}
         <div>
           <label className="block font-medium mb-1">School</label>
           <Input
             type="text"
             placeholder="ABC School/College"
-            value={data.school}
-            onChange={handleChange("school")}
             className="w-full p-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+            {...register("school", {
+              required: "school/college name required",
+            })}
           />
+          {errors.school && (
+            <p className="text-red-500">{errors.school.message}</p>
+          )}
         </div>
         {/* Field of Study */}
         <div>
@@ -118,10 +128,14 @@ const EducationSection = ({
           <Input
             type="text"
             placeholder="Computer Science"
-            value={data.field}
-            onChange={handleChange("field")}
             className="w-full p-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+            {...register("field", {
+              required: "field name is required",
+            })}
           />
+          {errors.field && (
+            <p className="text-red-500">{errors.field.message}</p>
+          )}
         </div>
         {/* Graduation Period */}
         <div>
@@ -129,22 +143,27 @@ const EducationSection = ({
           <Input
             type="text"
             placeholder="MM/YYYY - MM/YYYY"
-            value={data.graduation}
-            onChange={handleChange("graduation")} 
-            // onChange={handleChange}
             className="w-full p-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+            {...register("graduation", {
+              required: "Graduation period is required",
+            })}
           />
+          {errors.graduation && (
+            <p className="text-red-500">{errors.graduation.message}</p>
+          )}
         </div>
         {/* Location */}
         <div>
           <label className="block font-medium mb-1">Location</label>
           <Input
             type="text"
-            placeholder="City, State"
-            value={data.location}
-            onChange={handleChange("location")}
+            placeholder="Eg: Dehradun, Uttarakhand"
             className="w-full p-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+            {...register("location")}
           />
+          {errors.location && (
+            <p className="text-red-500">{errors.location.message}</p>
+          )}
         </div>
         {/* Achievements */}
         <div className="sm:col-span-2">
@@ -152,11 +171,12 @@ const EducationSection = ({
           <Input
             type="text"
             placeholder="What are your academic achievements?"
-            value={data.achievement}
-            onChange={handleChange("achievement")}
-            // onChange={handleChange("achievement")}
             className="w-full p-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+            {...register("achievement")}
           />
+          {errors.achievement && (
+            <p className="text-red-500">{errors.achievement.message}</p>
+          )}
         </div>
         <div className="flex gap-2">
           <Button onClick={() => null} className="text-xs">
