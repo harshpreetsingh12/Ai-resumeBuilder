@@ -88,7 +88,7 @@ const EducationSection = ({
   return (
     <div className="w-full mx-auto p-6 bg-white shadow-md border-gray-300 border-[1px] rounded-md text-sm relative">
       <div className="flex justify-between items-center mb-4">
-        <h3 className="text-md font-semibold text-black text-lg">
+        <h3 className="text-sm font-bold mb-5">
           Education {index + 1}
         </h3>
         <span
@@ -137,7 +137,8 @@ const EducationSection = ({
             type="text"
             placeholder="MM/YYYY - MM/YYYY"
             value={data.graduation}
-            onChange={handleChange("graduation")}
+            onChange={handleChange("graduation")} 
+            // onChange={handleChange}
             className="w-full p-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
           />
         </div>
@@ -160,6 +161,7 @@ const EducationSection = ({
             placeholder="What are your academic achievements?"
             value={data.achievement}
             onChange={handleChange("achievement")}
+            // onChange={handleChange("achievement")}
             className="w-full p-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
           />
         </div>
