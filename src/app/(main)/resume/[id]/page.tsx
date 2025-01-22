@@ -31,11 +31,12 @@ const TempresumeData= {
 
 const ResumePage = async ({ params }: ResumePageProps) => {
   const resolved = await params;
-  const resumeData = await getUserResume(resolved.id);
+  const WholeResumeData = await getUserResume(resolved.id);
+  console.log(WholeResumeData)
   return (
       <div className="grid grid-cols-2 w-full mt-3">
-        <Resume_Generator resumeData={resumeData} />
-        <Resume_template resumeData={TempresumeData} />
+        <Resume_Generator />
+        <Resume_template WholeResumeData={WholeResumeData} />
       </div>
   );
 };

@@ -66,10 +66,26 @@ export async function getUserResume(resumeId:string) {
                 id:resumeId 
             },
         })
+        const resumeContent = await db.resumeContent.findUnique({
+            where:{ 
+                resumeId:resumeId 
+            },
+        })
+        if(!resumeContent || !resume){
+            throw new Error("An unknown error occurred");
+        }
 
-        return resume
+        const Data={
+            educations:resumeContent.education,
+            resumeData:resume,
+            projectData:resumeContent.projectDetails,
+            experienceData:resumeContent.experience,
+            skills:resumeContent.skills
+        }
+        return Data
     }
     catch(error){
+        console.log(error)
         if (error instanceof Error) {
             throw new Error(error.message);
         } else {
@@ -86,35 +102,50 @@ export async function saveFullResume(resumeData:AutoResumeType) {
         const resumeId=resumeData.resumeData.id
         
         const { educations, resumeData:ResumeCoverData,projectData,experienceData,skills} = resumeData
-
         const resume = await db.$transaction(async (tx) => {
+            const existingResume = await tx.resume.findFirst({
+              where: {
+                id: resumeId,
+                userId: user.id,
+              },
+            });
+          
+            if (!existingResume) {
+              throw new Error(`No resume found with id: ${resumeId} and userId: ${user.id}`);
+            }
+          
             const updatedResume = await tx.resume.update({
-                where: {
-                    id:resumeId,
-                    userId: user.id,
-                },
-                data: ResumeCoverData,
+              where: { id: resumeId },
+              data: ResumeCoverData,
             });
           
             const resumeContent = await tx.resumeContent.findFirst({
-                where: { resumeId: resumeId },
+              where: { resumeId: resumeId },
             });
-              
-            if (!resumeContent) {
-               throw new Error(`No resume content found with resumeId: ${resumeId}`);
-            }
-            await tx.resumeContent.update({
-                where: { id: resumeContent.id },
-                data: {
-                    skills:skills,
-                    projectDetails:projectData,
-                    experience:experienceData,
-                    education:educations
-                  },
-                });
           
-            return {success:true, updatedResume};
-        });
+            if (!resumeContent) {
+              throw new Error(`No resume content found with resumeId: ${resumeId}`);
+            }
+          
+            await tx.resumeContent.update({
+              where: { id: resumeContent.id },
+              data: {
+                skills: skills,
+                projectDetails: projectData,
+                experience: experienceData,
+                education: educations,
+              },
+            });
+
+            const Data={
+                educations:resumeContent.education,
+                resumeData:updatedResume,
+                projectData:resumeContent.projectDetails,
+                experienceData:resumeContent.experience,
+                skills:resumeContent.skills
+            }
+            return { success: true, updatedResume:Data };
+          });
 
         return resume
     }

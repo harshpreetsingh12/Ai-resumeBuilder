@@ -21,7 +21,7 @@ const DefaultState={
   title: "",
   description: "",
   photoUrl: "",
-  colorHex: "",
+  colorHex: "black",
   boarderStyle: "",
   summary: "",
   firstName: "",

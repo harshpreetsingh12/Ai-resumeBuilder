@@ -8,29 +8,10 @@ export interface ProjectState {
 }
 
 export const projectSlice: StateCreator<ProjectState> = (set) => ({
-    projects: DefaultState,
+    projects: [],
     updateProjectData: (data) =>
         set((state) => ({
             ...state,
             projects: data, 
         })),
 });
-
-const DefaultState=[
-    {
-        projectName: "Uber Clone",
-        projectLink: "https://yoursavior.netlify.app/",
-        content:`-Developed workflow management features allowing teams to collaborate
-            -Designed and build a dynamic organization admin dashboard featuring advanced graphical data visualization.
-        `,
-        skillsUsed:['Javacript', "React", "Next"]
-    },
-    {
-        projectName: "Loom 2.0",
-        projectLink: "https://yoursavior.netlify.app/",
-        content:`-Developed workflow management features allowing teams to collaborate
-            -Designed and build a dynamic organization admin dashboard featuring advanced graphical data visualization.
-        `,
-        skillsUsed:['Javacript', "React", "Next"]
-    },
-]

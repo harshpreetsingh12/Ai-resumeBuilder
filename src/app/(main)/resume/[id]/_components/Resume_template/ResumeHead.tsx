@@ -15,13 +15,15 @@ const ResumeHead = () => {
                     <p className='text-gray-500 text-xs'>{city} {country} &bull; {phone} &bull; {email}</p>
                 </div>
 
-                <Image
-                    src={photoUrl || "/userImage.png"}
-                    alt="Picture of the author"
-                    width={80}
-                    height={80}
-                    className='rounded-full'
-                />
+                {photoUrl ?
+                    <Image
+                        src={photoUrl || "/userImage.png"}
+                        alt="Picture of the author"
+                        width={80}
+                        height={80}
+                        className='rounded-full'
+                    />
+                :null}
             </div>
         </HexContainer>
     )
