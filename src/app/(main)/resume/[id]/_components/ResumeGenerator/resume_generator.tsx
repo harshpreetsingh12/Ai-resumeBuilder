@@ -8,7 +8,7 @@ import PersonalInfo from "./PersonalInfo";
 import SkillForm from "./SkillForm";
 import MultiExperienceForm from "./ExperienceForm";
 import ProjectForm from "./ProjectForm";
-import MultiEducationForm from "./educationSection";
+import MultiEducationForm from "./educationForm";
 
 const Resume_Generator = () => {
   const [currentTab, setCurrentTab] = useState(GENERATOR_STEPS[0]);

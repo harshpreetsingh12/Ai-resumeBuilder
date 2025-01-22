@@ -14,7 +14,7 @@ export const experienceSchema = z.object({
 export const EducationSchema = z.object({
   school: z.string().min(1, "school/college name required"),
   field: z.string().min(1, "field is required"),
-  gradution: z.string().min(1, "graduation start/end date is required"),
+  graduation: z.string().min(1, "graduation start/end date is required"),
   location: z.string().optional(),
   achievement: z.string().optional(),
 });
