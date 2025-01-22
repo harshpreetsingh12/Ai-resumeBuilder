@@ -58,7 +58,7 @@ model Resume {
 
 model ResumeContent{
    id  String @id @default(cuid())
-   resumeId  String
+   resumeId  String @unique
    resume  Resume  @relation(fields: [resumeId], references: [id], onDelete: Cascade)
    
    // resume data

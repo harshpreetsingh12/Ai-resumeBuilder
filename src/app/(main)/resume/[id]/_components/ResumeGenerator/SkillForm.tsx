@@ -80,7 +80,7 @@ const SkillForm = () => {
                 <Textarea 
                     rows={6}
                     id="title"
-                    value={summary}
+                    value={summary || ''}
                     onChange={handleUpdateSummary}
                     placeholder='Add a summary about your professional background'
                 />

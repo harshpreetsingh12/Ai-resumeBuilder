@@ -1,34 +1,50 @@
 'use client'; 
 import { useAppStore } from '@/zustand';
-import React, { useEffect, useMemo } from 'react'
+import React, { useEffect, useMemo, useRef } from 'react'
 import ResumeHead from './ResumeHead';
 import ExperienceTab from './ExperienceTab';
 import SkillSection from './SkillSection';
 import EducationSection from './EducationSection';
 import ProjectSection from './ProjectSection';
 import SummarySection from './SummarySection';
-import { ResumeType } from '@/lib/schemaValidations';
+import { AutoResumeType, ResumeType } from '@/lib/schemaValidations';
 import useAutoSaveResume from '@/hooks/useSaveResume';
 
  
 type ResumePageProps = {
-  resumeData:ResumeType;
+  WholeResumeData:AutoResumeType;
 };
   
-const Resume_template = ({resumeData}:ResumePageProps) => {
-  const updateResumeData = useAppStore((state) => state.updateResumeData);
+const Resume_template = ({WholeResumeData}:ResumePageProps) => {
+  const {
+    education:educations,updateEducationData,
+    skillsState:skills, updateSkillsData,
+    projects, updateProjectData,
+    experiences,updateExperienceData,
+    resumeState,updateResumeData
+    
+  } = useAppStore((state) => state);
+
+  const isInitialLoad = useRef(true);
 
   useEffect(() => {
-    if (resumeData) {
-      updateResumeData(resumeData);
+    if (WholeResumeData) {
+      udpateRedux();
+      setTimeout(() => {
+        isInitialLoad.current = false;
+      }, 0);
     }
-  }, [resumeData]);
+  }, [WholeResumeData]);
 
-  const resumeState = useAppStore((state) => state.resumeState);
-  const experiences = useAppStore((state) => state.experiences);
-  const projects = useAppStore((state) => state.projects);
-  const educations = useAppStore((state) => state.education);
-  const skills = useAppStore((state) => state.skillsState);
+  const udpateRedux=()=>{
+    const {educations,resumeData, projectData, experienceData, skills} =WholeResumeData
+    updateEducationData(educations)
+    updateSkillsData(skills)
+    updateProjectData(projectData)
+    updateExperienceData(experienceData)
+    updateResumeData(resumeData)
+  }
+
 
   const AutoSaveResumeData = useMemo(
     () => ({
@@ -41,7 +57,7 @@ const Resume_template = ({resumeData}:ResumePageProps) => {
     [educations, resumeState, projects, experiences, skills]
   );
 
-  // const { isSaving } = useAutoSaveResume({ resumeData: AutoSaveResumeData });
+  const { isSaving } = useAutoSaveResume({ resumeData: AutoSaveResumeData, skipFirstSave:isInitialLoad.current });
 
 
   return (
