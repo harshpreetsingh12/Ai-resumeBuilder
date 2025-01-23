@@ -18,7 +18,7 @@ const HexContainer = ({ children }: HexProps) => {
       {children}
       <div
         style={{ borderColor: lightenColorHex }}
-        className="w-full border-b-2"
+        className="w-full border-b-[0.5px]"
       />
     </Fragment>
   );

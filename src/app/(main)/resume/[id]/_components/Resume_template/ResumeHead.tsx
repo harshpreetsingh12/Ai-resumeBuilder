@@ -21,7 +21,7 @@ const ResumeHead = () => {
                         alt="Picture of the author"
                         width={80}
                         height={80}
-                        className='rounded-full'
+                        className='rounded-full h-16 w-16 object-cover'
                     />
                 :null}
             </div>
