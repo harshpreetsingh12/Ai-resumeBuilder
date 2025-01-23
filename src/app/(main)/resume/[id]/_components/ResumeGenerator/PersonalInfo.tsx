@@ -1,4 +1,3 @@
-import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { useAppStore } from '@/zustand';
 import React from 'react'
@@ -7,7 +6,7 @@ const PersonalInfo = () => {
     const updateResumeData = useAppStore((state) => state.updateResumeData);
     const resumeState = useAppStore((state) => state.resumeState);
        
-    const { firstName, lastName, email, phone, jobTitle, city, country} = resumeState
+    const { firstName, lastName, email, photoUrl ,phone, jobTitle, city, country} = resumeState
     
     const handleUpdatePersonalInfo = (param:string, value:string) => {
         updateResumeData({[param]:value});
@@ -20,6 +19,7 @@ const PersonalInfo = () => {
             <div className='flex gap-2'>
                 <Input 
                     id="title"
+                    value={photoUrl || ''}
                     onChange={(e)=>handleUpdatePersonalInfo('photoUrl', e.target.value)}
                     placeholder='Eg: Provide a public Url for your picture'
                 />

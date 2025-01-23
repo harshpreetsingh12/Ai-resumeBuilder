@@ -16,7 +16,7 @@ const SkillSection = () => {
         <div className='flex flex-wrap gap-2 py-2'>
           {skills.map((skill,index)=>{
             return (
-              <p key={index} style={{backgroundColor:colorHex}} className='text-white p-1 px-2 text-xxs rounded-lg'>{skill}</p>
+              <p key={index} style={{backgroundColor:colorHex}} className='text-white h-5 flex items-center px-2 text-xxs rounded-lg'>{skill}</p>
             )
           })}
         </div>

@@ -4,6 +4,7 @@ import Link from "next/link";
 import { Button } from "./ui/button";
 import DarkModeSwitch from "./DarkModeSwitch";
 import { checkUser } from "@/lib/checkUser";
+import CheckUserClient from "./CheckUserClient";
 
 const Header = async () => {
   await checkUser();
@@ -47,6 +48,7 @@ const Header = async () => {
             />
           </SignedIn>
         </div>
+        <CheckUserClient/>
       </nav>
     </div>
   );

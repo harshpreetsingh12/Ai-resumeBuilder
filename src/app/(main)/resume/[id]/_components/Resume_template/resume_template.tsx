@@ -7,10 +7,12 @@ import SkillSection from './SkillSection';
 import EducationSection from './EducationSection';
 import ProjectSection from './ProjectSection';
 import SummarySection from './SummarySection';
-import { AutoResumeType, ResumeType } from '@/lib/schemaValidations';
+import { AutoResumeType } from '@/lib/schemaValidations';
 import useAutoSaveResume from '@/hooks/useSaveResume';
+import { useReactToPrint } from "react-to-print";
+import { Printer } from 'lucide-react';
+import { Button } from '@/components/ui/button';
 
- 
 type ResumePageProps = {
   WholeResumeData:AutoResumeType;
 };
@@ -25,6 +27,9 @@ const Resume_template = ({WholeResumeData}:ResumePageProps) => {
     
   } = useAppStore((state) => state);
 
+  const contentRef = useRef<HTMLDivElement>(null);
+  const reactToPrintFn = useReactToPrint({ contentRef });
+  
   const isInitialLoad = useRef(true);
 
   useEffect(() => {
@@ -61,8 +66,13 @@ const Resume_template = ({WholeResumeData}:ResumePageProps) => {
 
 
   return (
-    <div className='py-6 bg-gray-100 px-3 xl:px-10 h-screen overflow-scroll scrollbar-none'>
-      <div className='bg-white rounded-md px-2 lg:px-6 py-2 shadow-gray-400 shadow-sm mb-24'> 
+    <div className='py-6 bg-gray-100 px-3 xl:px-10 h-screen overflow-scroll scrollbar-none relative'>
+      <div className=' fixed right-2 bottom-2'>
+        <Button title='Print Resume' onClick={()=>reactToPrintFn()} variant={'outline'} className='rounded-md'>
+          <Printer size={12}/>
+        </Button>
+      </div>
+      <div ref={contentRef} className='bg-white rounded-md px-2 lg:px-6 py-2   mb-24'> 
         <ResumeHead/> 
         <SummarySection/> 
         <ExperienceTab/> 
