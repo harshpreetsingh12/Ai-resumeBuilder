@@ -1,6 +1,6 @@
 import { Input } from '@/components/ui/input'
 import { useAppStore } from '@/zustand';
-import React, { useState } from 'react'
+import React from 'react'
 
 const ResumeInfoForm = () => {
    const updateResumeData = useAppStore((state) => state.updateResumeData);

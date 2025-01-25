@@ -2,20 +2,12 @@
 
 import { Button } from '@/components/ui/button';
 import useFetch from '@/hooks/useFetch';
-import { Dock, Plus } from 'lucide-react';
+import { Plus } from 'lucide-react';
 import React, { useEffect } from 'react'
 import { createResume } from '../../../../actions/resume';
 import { toast } from 'sonner';
 import { useRouter } from 'next/navigation';
 import Resume_card from './resume_card';
-import { generateExperience, generateProjects } from '../../../../actions/generators';
-
-interface ResumeData {
-  name: string;
-  experience: number;
-  skills: string[];
-}
-
 
 type Resume = {
   id: string;

@@ -3,7 +3,7 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input'
 import { Textarea } from '@/components/ui/textarea';
 import { useAppStore } from '@/zustand';
-import { AudioLines, Cross, X } from 'lucide-react';
+import { AudioLines, X } from 'lucide-react';
 import React, { useState } from 'react'
 import { toast } from 'sonner';
 
