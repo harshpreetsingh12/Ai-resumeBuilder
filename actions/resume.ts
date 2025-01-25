@@ -4,6 +4,7 @@ import db  from "@/lib/prisma";
 import { isUserExist } from "./helpers";
 import { revalidatePath } from "next/cache";
 import { AutoResumeType } from "@/lib/schemaValidations";
+import { Prisma } from '@prisma/client';
 
 export async function createResume(){
     try{
@@ -102,7 +103,7 @@ export async function saveFullResume(resumeData:AutoResumeType) {
         const resumeId=resumeData.resumeData.id
         
         const { educations, resumeData:ResumeCoverData,projectData,experienceData,skills} = resumeData
-        const resume = await db.$transaction(async (tx) => {
+        const resume = await db.$transaction(async (tx: Prisma.TransactionClient) => {
             const existingResume = await tx.resume.findFirst({
               where: {
                 id: resumeId,
