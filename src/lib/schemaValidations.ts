@@ -29,8 +29,8 @@ export const projectSchema = z.object({
 export type ExperienceType = {
   position: string;
   companyName: string;
-  startDate: Date | string;
-  endDate: Date | string;
+  startDate: string;
+  endDate: string;
   content: string;
   location: string;
 };
