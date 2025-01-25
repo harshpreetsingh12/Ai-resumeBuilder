@@ -7,7 +7,7 @@ const EducationSection = () => {
   const educations = useAppStore((state) => state.education);
 
   return (
-    <div className='flex w-full flex-col relative justify-between py-3'>
+    <div className='flex w-full flex-col relative justify-between py-3 min-h-28'>
       <Headlines title="Education"/>
       <div className='flex flex-col gap-1'>
         {educations.map((education,index)=>{

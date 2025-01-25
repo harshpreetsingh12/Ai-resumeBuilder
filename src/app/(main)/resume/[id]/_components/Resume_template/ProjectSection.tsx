@@ -17,7 +17,7 @@ const ProjectSection = () => {
   
   return (
     <HexContainer>
-      <div className='flex w-full flex-col relative justify-between py-3'>
+      <div className='flex w-full flex-col relative justify-between py-3 min-h-28'>
         <Headlines title="Projects"/>
         <div className='flex flex-col gap-1'>
           {projects.map((project,index)=>{

@@ -8,7 +8,7 @@ const ResumeHead = () => {
     const { photoUrl, firstName, lastName, jobTitle,city,country, phone, email, colorHex  } = resumeState
     return (
         <HexContainer>
-            <div className='flex w-full relative justify-between py-3'>
+            <div className='flex w-full relative justify-between py-3 min-28'>
                 <div className='flex flex-col gap-1 justify-center'>
                     <h1 style={{color:colorHex}} className='font-bold text-1xl'>{firstName} {lastName}</h1>
                     <h3 style={{color:colorHex}} className='text-sm'>{jobTitle}</h3>

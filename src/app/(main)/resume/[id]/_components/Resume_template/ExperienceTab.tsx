@@ -10,7 +10,7 @@ const ExperienceTab = () => {
 
   return (
     <HexContainer>
-      <div className="flex w-full flex-col relative justify-between py-3">
+      <div className="flex w-full flex-col relative justify-between py-3 min-h-28">
         <Headlines title="Work Experience" />
         <div className="flex flex-col gap-1">
           {experiences.map((experience, index) => {

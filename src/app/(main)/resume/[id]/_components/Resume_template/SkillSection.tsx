@@ -11,7 +11,7 @@ const SkillSection = () => {
   
   return (
     <HexContainer>
-      <div className='flex w-full flex-col relative justify-between py-3'>
+      <div className='flex w-full flex-col relative justify-between py-3 min-h-28'>
         <Headlines title="Skills"/>
         <div className='flex flex-wrap gap-2 py-2'>
           {skills.map((skill,index)=>{

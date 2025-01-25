@@ -13,7 +13,7 @@ import useAutoSaveResume from "@/hooks/useSaveResume";
 import { useReactToPrint } from "react-to-print";
 import { Printer } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import ColorPicker from "./ColorComponent";
+import ColorPicker from "./ColorPickerComponent";
 
 type ResumePageProps = {
   WholeResumeData: AutoResumeType;
@@ -37,9 +37,6 @@ const Resume_template = ({ WholeResumeData }: ResumePageProps) => {
   const reactToPrintFn = useReactToPrint({ contentRef });
 
   const isInitialLoad = useRef(true);
-
-  const [isPickerVisible, setPickerVisible] = useState(false); // Manage visibility of the color picker
-  const [colorHex, setColorHex] = useState("#000000"); // Manage the current selected color
 
   useEffect(() => {
     if (WholeResumeData) {
@@ -78,21 +75,9 @@ const Resume_template = ({ WholeResumeData }: ResumePageProps) => {
 
   return (
     <div className="py-6 bg-gray-100 px-3 xl:px-10 h-screen overflow-scroll scrollbar-none relative">
-      {isPickerVisible && (
-        <div className="fixed top-0 left-0 w-full h-full flex items-center justify-center bg-black bg-opacity-50 z-50">
-          <div className="p-4 bg-white rounded-md shadow-lg">
-            <ColorPicker color={colorHex} setColor={setColorHex} />
-            <Button
-              onClick={() => setPickerVisible(false)}
-              className="mt-4 w-full"
-            >
-              Close
-            </Button>
-          </div>
-        </div>
-      )}
-
-      <div className="fixed right-2 bottom-2">
+      
+      <div className="fixed z-10 right-2 bottom-2 flex gap-2">
+        <ColorPicker/>
         <Button
           title="Print Resume"
           onClick={() => reactToPrintFn()}
@@ -102,14 +87,6 @@ const Resume_template = ({ WholeResumeData }: ResumePageProps) => {
           <Printer size={12} />
         </Button>
       </div>
-
-      {/* Open Color Picker Button */}
-      <Button
-        onClick={() => setPickerVisible(true)}
-        className="absolute bg-gray-50 rounded-full"
-      >
-        🎨
-      </Button>
 
       <div
         ref={contentRef}
