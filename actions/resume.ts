@@ -10,8 +10,10 @@ export async function createResume(){
     try{
         const user = await isUserExist();
 
-        if(!user) console.log("User not found");
-
+        if (!user) {
+            throw new Error("User does not exist");
+          }
+        
         const document= await db.resume.create({
             data: {
                 userId:user.id,
@@ -38,7 +40,10 @@ export async function createResume(){
 export async function getAllUserResumes() {
     try{
         const user = await isUserExist();
-        if(!user) console.log("user not found");
+        if (!user) {
+            throw new Error("User does not exist");
+          }
+        
 
         const documents = await db.resume.findMany({
             where:{ userId: user.id },
@@ -59,8 +64,10 @@ export async function getAllUserResumes() {
 export async function getUserResume(resumeId:string) {
     try{
         const user = await isUserExist();
-        if(!user) console.log("user not found");
-
+        if (!user) {
+            throw new Error("User does not exist");
+          }
+        
         const resume = await db.resume.findUnique({
             where:{ 
                 userId: user.id,
@@ -98,8 +105,10 @@ export async function getUserResume(resumeId:string) {
 export async function saveFullResume(resumeData:AutoResumeType) {
     try{
         const user = await isUserExist();
-        if(!user) console.log("user not found");
-
+        if (!user) {
+            throw new Error("User does not exist");
+          }
+        
         const resumeId=resumeData.resumeData.id
         
         const { educations, resumeData:ResumeCoverData,projectData,experienceData,skills} = resumeData
