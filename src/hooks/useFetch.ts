@@ -1,27 +1,26 @@
 import { useState } from "react";
 import { toast } from "sonner";
 
-type Callback<T> = (data: any) => Promise<T>;
-
-type UseFetchReturn<T> = {
+type UseFetchReturn<T, A extends unknown[]> = {
   data: T | undefined;
-  error: Error | string | null;
-  fn: (...args: unknown[]) => Promise<void>;
   loading: boolean;
-  setData: React.Dispatch<React.SetStateAction<T | undefined>>;
+  error: string | null;
+  fetchData: (...args: A) => Promise<void>; // Include fetchData explicitly
 };
 
-const useFetch = <T>(cb: Callback<T>): UseFetchReturn<T> => {
+type Callback<T, A extends unknown[]> = (...args: A) => Promise<T>;
+
+const useFetch = <T, A extends unknown[]>(cb: Callback<T, A>): UseFetchReturn<T, A> => {
   const [data, setData] = useState<T | undefined>(undefined);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
-  const fn = async (...args: unknown[]) => {
+  const fetchData = async (...args: A) => {
     setLoading(true);
     setError(null);
 
     try {
-      const response = await cb(...args);
+      const response = await cb(...args); // Call the callback with arguments
       setData(response);
     } catch (err: any) {
       setError(err.message || "An error occurred");
@@ -31,7 +30,8 @@ const useFetch = <T>(cb: Callback<T>): UseFetchReturn<T> => {
     }
   };
 
-  return { data, loading, error, fn, setData };
+  return { data, loading, error, fetchData }; // Include fetchData in the return object
 };
+
 
 export default useFetch;
