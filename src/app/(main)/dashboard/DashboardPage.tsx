@@ -23,7 +23,7 @@ const DashboardPage = ({resumes}:DashBoardPageProps) => {
   const { 
       data: resumeData,
       error,
-      fn: createFuncFunction,
+      fetchData: createFuncFunction,
       loading: updateDefaultLoading
   } =useFetch(createResume);
   const router = useRouter()
@@ -41,7 +41,10 @@ const DashboardPage = ({resumes}:DashBoardPageProps) => {
 
   useEffect(()=>{
     if(error){
-      const errorMessage = error instanceof Error ? error.message : error;
+      const errorMessage =
+      typeof error === "object" && error !== null && "message" in error
+        ? (error as Error).message
+        : String(error);
       toast.error(errorMessage || "Failed to create resume" )
     }
   },[error])
