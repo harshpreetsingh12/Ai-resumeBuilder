@@ -1,7 +1,7 @@
 import { generateExperience } from "#/generators";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
-import { experienceSchema } from "@/lib/schemaValidations";
+import { experienceSchema, ExperienceType } from "@/lib/schemaValidations";
 import { useAppStore } from "@/zustand";
 import { AudioLines, Trash } from "lucide-react";
 import React, { useState } from "react";
@@ -16,17 +16,8 @@ import { TooltipTrigger } from "@radix-ui/react-tooltip";
 import { Input } from "@/components/ui/input";
 import { toast } from "sonner";
 
-type ExperienceProps = {
-  position: string;
-  companyName: string;
-  startDate: Date | string;
-  endDate: Date | string;
-  content: string;
-  location: string;
-};
-
 type ExperienceCompProps = {
-  experience: ExperienceProps;
+  experience: ExperienceType;
   position: number;
 };
 

@@ -1,10 +1,9 @@
 'use client';
 
 import useDebounce from "@/hooks/useDebounce";
-import { AutoResumeType, EducationType, ExperienceType, ProjectType, ResumeType } from "@/lib/schemaValidations";
+import { AutoResumeType, ExperienceType } from "@/lib/schemaValidations";
 import { useEffect, useState } from "react";
 import { toast } from "sonner";
-import db  from "@/lib/prisma";
 import { saveFullResume } from "#/resume";
 
 type AutoResumeProps = {
