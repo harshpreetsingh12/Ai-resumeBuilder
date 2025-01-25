@@ -84,7 +84,7 @@ const ExperienceForm = ({ experience, position }: ExperienceCompProps) => {
   );
   const experiences = useAppStore((state) => state.experiences);
 
-  const handleUpdateCurrentExperience = (data: ExperienceProps) => {
+  const handleUpdateCurrentExperience = (data: ExperienceType) => {
     const newExperience = [...experiences];
     newExperience[position] = data;
     updateExperienceData(newExperience);
@@ -95,7 +95,7 @@ const ExperienceForm = ({ experience, position }: ExperienceCompProps) => {
     updateExperienceData(newExperience);
   };
 
-  const onSubmit = (data: ExperienceProps) => {
+  const onSubmit = (data: ExperienceType) => {
     handleUpdateCurrentExperience(data);
   };
 
@@ -208,7 +208,7 @@ const ExperienceForm = ({ experience, position }: ExperienceCompProps) => {
             className="mr-2"
             checked={watch("endDate") === "Present" ? true : false}
             onChange={(e) =>
-              setValue("endDate", e.target.checked ? "Present" : new Date())
+              setValue("endDate", e.target.checked ? "Present" : '')
             }
           />
           <label className="font-medium">I currently work here</label>
