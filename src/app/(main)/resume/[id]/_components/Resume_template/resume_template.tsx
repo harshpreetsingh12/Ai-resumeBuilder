@@ -75,9 +75,8 @@ const Resume_template = ({ WholeResumeData }: ResumePageProps) => {
 
   return (
     <div className="py-6 bg-gray-100 px-3 xl:px-10 h-screen overflow-scroll scrollbar-none relative">
-      
       <div className="fixed z-10 right-2 bottom-2 flex gap-2">
-        <ColorPicker/>
+        <ColorPicker />
         <Button
           title="Print Resume"
           onClick={() => reactToPrintFn()}
@@ -88,10 +87,7 @@ const Resume_template = ({ WholeResumeData }: ResumePageProps) => {
         </Button>
       </div>
 
-      <div
-        ref={contentRef}
-        className="bg-white rounded-md px-2 lg:px-6 py-2 mb-24"
-      >
+      <div ref={contentRef} className="rounded-md px-2 lg:px-6 py-2 mb-24">
         <ResumeHead />
         <SummarySection />
         <ExperienceTab />

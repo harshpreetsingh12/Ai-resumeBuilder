@@ -52,9 +52,7 @@ const Resume_Generator = () => {
             <div
               key={gen.key}
               onClick={() => setCurrentTab(gen)}
-              className={`items-center flex ${
-                currentTab.key != gen.key ? "text-gray-500" : "text-black"
-              } text-xs mx-2 gap-2 cursor-pointer hover:text-black`}
+              className={`items-center flex cursor-pointer text-xs mx-2 gap-2 cursor-pointe`}
             >
               <span>{gen.title}</span>
               {index !== GENERATOR_STEPS.length - 1 && (
@@ -69,7 +67,7 @@ const Resume_Generator = () => {
 
       <div className="flex flex-col items-center pt-10">
         <h1 className="text-2xl font-bold"> {currentTab.title} </h1>
-        <p className="text-xs text-gray-600 pt-1">{currentTab.description}</p>
+        <p className="text-xs pt-1">{currentTab.description}</p>
       </div>
 
       {FormUi}

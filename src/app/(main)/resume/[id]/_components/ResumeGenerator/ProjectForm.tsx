@@ -41,7 +41,11 @@ const MultiProjectForm = () => {
         return <ProjectForm key={index} project={project} position={index} />;
       })}
       {projects.length < 3 ? (
-        <Button onClick={AddNewProject} variant={"outline"} className="w-fit">
+        <Button
+          onClick={AddNewProject}
+          variant={"outline"}
+          className="w-fit text-black"
+        >
           Add Project
         </Button>
       ) : null}
@@ -113,7 +117,7 @@ const ProjectForm = ({ project, position }: ProjectCompProps) => {
   };
 
   return (
-    <div className="w-full mx-auto p-6 bg-white shadow-md border-gray-300 border-[1px] rounded-md text-sm mb-4 relative">
+    <div className="w-full mx-auto p-6  shadow-md border-gray-300 border-[1px] rounded-md text-sm mb-4 relative">
       <h1 className="text-sm font-bold mb-5">Project {position + 1}</h1>
 
       <span
