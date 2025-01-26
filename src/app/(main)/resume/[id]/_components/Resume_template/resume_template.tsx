@@ -74,7 +74,7 @@ const Resume_template = ({ WholeResumeData }: ResumePageProps) => {
   });
 
   return (
-    <div className="py-6 bg-gray-100 px-3 xl:px-10 h-screen overflow-scroll scrollbar-none relative">
+    <div className="py-6 bg-gray-100 px-3 xl:px-10 h-screen overflow-scroll scrollbar-none relative  md:w-[50%] w-[100%]">
       <div className="fixed z-10 right-2 bottom-2 flex gap-2">
         <ColorPicker />
         <Button
