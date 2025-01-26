@@ -45,7 +45,7 @@ const Resume_Generator = () => {
 
   const FormUi = useMemo(() => FormGenerator(), [currentTab]);
   return (
-    <div className="px-3 xl:px-10 w-full flex flex-col h-[86vh] overflow-y-scroll">
+    <div className="px-3 xl:px-10 w-full flex flex-col h-full pb-28 overflow-y-scroll pt-4">
       <div className="flex justify-center">
         {GENERATOR_STEPS.map((gen, index) => {
           return (

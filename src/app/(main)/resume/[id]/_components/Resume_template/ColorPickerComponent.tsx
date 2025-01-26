@@ -46,7 +46,7 @@ const ColorPicker = () => {
         className="rounded-md"
         onClick={() => setPickerVisible((prev) => !prev)}
       >
-        <Palette size={12} />
+        <Palette size={12} color="black" />
       </Button>
     </div>
   );

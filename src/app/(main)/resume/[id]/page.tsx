@@ -16,7 +16,7 @@ const ResumePage = async ({ params }: ResumePageProps) => {
   const WholeResumeData = await getUserResume(resolved.id);
 
   return (
-      <div className="grid grid-cols-2 w-full mt-3">
+      <div className="grid grid-cols-2 w-full h-[90vh]">
         <Resume_Generator />
         <Resume_template WholeResumeData={WholeResumeData} />
       </div>

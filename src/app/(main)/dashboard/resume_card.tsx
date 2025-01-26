@@ -1,8 +1,7 @@
 "use client";
 
 import React from "react";
-import { Button } from "@/components/ui/button";
-import { Dock } from "lucide-react";
+import { StaticImageData } from 'next/image';
 import { useRouter } from "next/navigation";
 import Image from "next/image";
 
@@ -13,10 +12,10 @@ type Resume = {
 
 type ResumeCardProps = {
   resume: Resume;
-  image: string;
+  imagePath: string | StaticImageData;
 };
 
-const Resume_card = ({ resume, image }: ResumeCardProps) => {
+const Resume_card = ({ resume, imagePath }: ResumeCardProps) => {
   const router = useRouter();
 
   const handleNavigate = (id: string) => {
@@ -25,19 +24,17 @@ const Resume_card = ({ resume, image }: ResumeCardProps) => {
 
   return (
     <div
-      className="flex flex-col items-center justify-center w-64 bg-white shadow-md rounded-lg hover:shadow-lg transition-shadow duration-200 mb-10 py-2 cursor-pointer"
+      className="flex flex-col items-center w-[200px] bg-white shadow-md rounded-lg hover:shadow-lg transition-shadow duration-200 mb-10 cursor-pointer relative overflow-hidden"
       onClick={() => handleNavigate(resume.id)}
     >
-      <Image
-        src={image}
-        alt={resume.title}
-        width={300}
-        height={100}
-        className=" rounded-md object-cover mb-4"
-      />
-      <h2 className="text-lg font-semibold text-gray-800 mb-2">
+      <h2 className="text-sm font-semibold text-gray-800 my-2">
         {resume.title}
       </h2>
+      <Image
+        src={imagePath}
+        alt={resume.title}
+          className="w-[100%] object-cover"
+      />
       {/* <Button
         className="text-white bg-gray-600 hover:bg-gray-900 rounded-md px-4 py-2"
         onClick={() => handleNavigate(resume.id)}

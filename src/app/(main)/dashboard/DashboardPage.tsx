@@ -66,21 +66,20 @@ const DashboardPage = ({ resumes }: DashBoardPageProps) => {
   }, [error]);
 
   return (
-    <div className="h-screen overflow-y-scroll pb-40">
+    <div className="h-screen overflow-y-scroll pb-40 flex flex-col pt-4">
       <Button
         disabled={updateDefaultLoading}
-        variant="outline"
-        className="text-black mb-10 "
+         className="mb-10 mx-auto"
         onClick={() => createFuncFunction()}
       >
         New Resume
         <Plus className="h-4 w-4" />
       </Button>
-      <div className="grid grid-cols-4 ml-10 gap-6">
+      <div className="flex flex-wrap ml-10 gap-6 w-full">
         {resumes.map((resume) => {
           const randomImage = getRandomImage(resume.id);
           return (
-            <Resume_card key={resume.id} resume={resume} image={randomImage} />
+            <Resume_card key={resume.id} resume={resume} imagePath={randomImage} />
           );
         })}
       </div>

@@ -12,7 +12,7 @@ export const lightTheme: ThemType = {
 };
 
 export const darkTheme: ThemType = {
-  primary: '#000000',
+  primary: '#131313',
   secondary: '#333333',
   text: '#ffffff',
 };

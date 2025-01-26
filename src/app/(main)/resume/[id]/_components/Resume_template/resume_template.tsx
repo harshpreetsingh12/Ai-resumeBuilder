@@ -83,11 +83,11 @@ const Resume_template = ({ WholeResumeData }: ResumePageProps) => {
           variant={"outline"}
           className="rounded-md"
         >
-          <Printer size={12} />
+          <Printer size={12}  color="black" />
         </Button>
       </div>
 
-      <div ref={contentRef} className="rounded-md px-2 lg:px-6 py-2 mb-24">
+      <div ref={contentRef} className="bg-white rounded-md px-2 lg:px-6 py-2 mb-24 ">
         <ResumeHead />
         <SummarySection />
         <ExperienceTab />

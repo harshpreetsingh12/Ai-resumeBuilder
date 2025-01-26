@@ -14,7 +14,7 @@ const Header = async () => {
       <nav className="container mx-auto px-4 py-4 flex items-center justify-between lg:px-12">
         <Link href="/" className="flex items-center gap-2">
           <Image
-            src={"/logo.jpg"}
+            src={"/android-chrome-512x512.png"}
             alt="Logo"
             width={35}
             height={35}
