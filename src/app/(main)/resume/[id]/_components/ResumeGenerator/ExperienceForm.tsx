@@ -54,7 +54,7 @@ const MultiExperienceForm = () => {
         <Button
           onClick={AddNewExperience}
           variant={"outline"}
-          className="w-fit"
+          className="w-fit text-black"
         >
           Add Experience
         </Button>
@@ -118,7 +118,7 @@ const ExperienceForm = ({ experience, position }: ExperienceCompProps) => {
   };
 
   return (
-    <div className="w-full mx-auto p-6 bg-white shadow-md border-gray-300 border-[1px] bord rounded-md text-sm mb-4 relative">
+    <div className="w-full mx-auto p-6  shadow-md border-[1px] bord rounded-md text-sm mb-4 relative">
       <h1 className="text-sm font-bold mb-5">Work Experience {position + 1}</h1>
 
       <span
@@ -208,7 +208,7 @@ const ExperienceForm = ({ experience, position }: ExperienceCompProps) => {
             className="mr-2"
             checked={watch("endDate") === "Present" ? true : false}
             onChange={(e) =>
-              setValue("endDate", e.target.checked ? "Present" : '')
+              setValue("endDate", e.target.checked ? "Present" : "")
             }
           />
           <label className="font-medium">I currently work here</label>

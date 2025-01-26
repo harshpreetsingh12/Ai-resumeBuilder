@@ -42,10 +42,7 @@ const MultiEducationForm = () => {
           onDelete={deleteEducation}
         />
       ))}
-      <Button
-        onClick={addNewEducation}
-        className="mt-4 w-[20%] px-4 py-2 bg-black text-white font-semibold rounded-md  transition mb-2"
-      >
+      <Button onClick={addNewEducation} className="w-fit">
         Add New Education
       </Button>
     </div>
@@ -84,7 +81,7 @@ const EducationSection = ({
   });
 
   return (
-    <div className="w-full mx-auto p-6 bg-white shadow-md border-gray-300 border-[1px] rounded-md text-sm relative">
+    <div className="w-full mx-auto p-6 shadow-md border-gray-300 border-[1px] rounded-md text-sm relative">
       <div className="flex justify-between items-center mb-4">
         <h3 className="text-sm font-bold mb-5">Education {index + 1}</h3>
         <span
